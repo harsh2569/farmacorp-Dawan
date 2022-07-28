@@ -1,0 +1,433 @@
+<html>
+<head>
+<!DOCTYPE html>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Salud360</title>
+
+	<!--== Style Bootstrap ==-->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+	<style type="text/css">
+        /*body
+        {
+            background-color: #40458f;
+            max-width: 100%;
+        }*/
+        
+        .Contenedor
+        {
+            width: 100%;
+        }
+
+        #Banner
+        {
+            max-width: 100%;
+            margin: auto;
+        }
+        
+        #SectionSucursales
+        {
+            max-width: 100%;
+        }
+
+		.Sucursales
+		{
+			background: linear-gradient(90deg, #FFFFFF 0%, #CBECFC 100%);
+			color: #004581;
+            margin: auto;
+            font-family: Arial, Helvetica, sans-serif;
+		}
+      
+        .ListaSucursales
+        {
+            margin-left: 10%;
+        }
+        
+        .ListaServicios
+        {
+            margin-left: 10%;
+        }
+
+		/*.Suc
+		{
+            font-size: 300%;
+		}*/
+
+		/*.title
+		{
+			font-size: 150%;
+            font-weight: bold;            
+		}*/
+
+       .Subtitle {
+            font-size: 19.2px;
+            font-weight: 700;
+            line-height: 28.8px;
+        }
+
+        .SubtitleP
+        {
+            font-size: 48px;
+            line-height:72px;
+            font-weight: bold;
+        }
+      	.SubtitleS	
+        {
+          font-size: 24px;
+          font-weight: 700;
+          line-height: 36px;
+        }
+      	
+      	.SubtitleSS	
+        {
+            font-size: 24px;
+          	line-height:36px;
+            font-weight: bold;
+          	margin-left: -10%;
+        }
+      
+      	.listinfo li {
+            font-size: 16px;
+            line-height: 24px;
+        }
+
+		a 
+		{
+		  	outline: none;
+		 	text-decoration: none;
+		  	color: #004581;
+		}
+        /*.mapa 
+        {
+            background-color: #40458f;
+        }*/
+
+        footer
+        {
+            background-color: #fff;
+        }
+
+/*         li
+        {
+            font-size: 100%;
+            margin-right: 2%;
+        }
+ */
+        #Campana
+        {
+            background-color: #40458f;
+            margin: auto;
+            margin-top: 0px;
+        }
+
+        #info
+        {
+            padding-bottom: 1%;
+        }
+	</style>
+</head>
+<body>
+    <div class="Contenedor">
+        <!--<div class="Banner">
+            <img src="header.jpg" width="100%" height="auto">
+        </div>-->
+        <div class="Sucursales" id="Sucursales">
+            <br/>
+            <br/>
+            <div class="section-title text-center"> 
+                <p class="SubtitleP">
+                    Farmacorp Salud 360
+                </p>
+              	<p class="SubtitleS">
+                	Servicios
+              	</p>
+            </div>
+            <div class="ListaServicios">
+              <div class="row justify-content-center">
+                <div class="col-md-5">
+                  <p class="Subtitle">
+                    ENFERMERIA
+                  </p>
+                  <P class="Ser">
+                    <ul class="listinfo">
+                      <li>Signos vitales.</li>
+                      <li>Control de glicemia.</li>
+                      <li>Aplicación de inyectable IM.</li>
+                      <li>Aplicación de inyectable EV.</li>
+                      <li>Colocación de tapón heparinizado.</li>
+                      <li>Curaciones.</li>
+                    </ul>
+                  </p>
+                </div>
+                <div class="col-md-5">
+                  <p class="Subtitle">
+                    BANCO DE VACUNAS
+                  </p>
+                  <p class="Ser">
+                  	<ul class="listinfo">
+                      <li>Influenza</li>
+                      <li>Tétano</li>
+                      <li>Rabia</li>
+                      <li>Otras</li>
+                  	</ul>
+                  </p>
+                  <p class="Subtitle">
+                    TELEMEDICINA
+                  </p>
+                  <p class="Ser">
+                    <ul class="listinfo">
+                      <li>MedFlex</li>
+                      <li>Mia</li>
+                	</ul>
+                  </p>
+                </div>
+              </div>
+          	</div>
+            <div class="ListaSucursales">
+              <div class="section-title text-center"> 
+              	<p class="SubtitleSS">
+                	Sucursales
+              	</p>
+            </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                            <p>
+                                <img src="{{ 'Logo_Salud360.png' | asset_url }}" style="width: 50%; heigth:50%"/>
+                            </p>
+                            <p class="Subtitle">
+                                Atención de 7:00am  a 23:00pm
+                            </p>
+                            <p class="Subtitle">
+                                ZONA NORTE
+                            </p>
+                            <p class="Suc">
+                                <ul class="listinfo">
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.77075652752576%2C-63.17129403533825&z=18">
+                                        <li>
+                                            Suc. Trinidad 2do anillo
+                                        </li>
+                                    </a>
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.732120687458284%2C-63.16853015838531&z=18">
+                                        <li>
+                                            Suc. Banzer 6do anillo
+                                        </li>
+                                    </a>
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.752205242951415%2C-63.16371291349182&z=18">
+                                        <li>
+                                            Suc. Alemana 4do anillo
+                                        </li>
+                                    </a>
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.7747849883471%2C-63.17519219510651&z=18">
+                                        <li>
+                                            Suc. Uruguay Esq. Mamore
+                                        </li>
+                                    </a>
+                                    <!--<a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.74371113713118%2C-63.14963919874193&z=18">
+                                        <li>
+                                            Suc. 2 de agosto
+                                        </li>
+                                    </a>-->
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.71495215552114%2C-63.16609539384842&z=18">
+                                        <li>
+                                            Suc. Remanso 8vo anillo
+                                        </li>
+                                    </a>
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.695520053274898%2C-63.156464100594334&z=18">
+                                        <li>
+                                            Suc. Sevilla zona Norte Km11
+                                        </li>
+                                    </a>
+                                </ul>
+                            <p>
+                            <p class="Subtitle">
+                                ZONA ESTE
+                            </p>
+                            <p class="Suc">
+                                <ul class="listinfo">
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.800325982495075%2C-63.15031847850418&z=18">
+                                        <li>
+                                            Suc. Héroes del Chaco 4to anillo
+                                        </li>
+                                    </a>
+                                    <!--<a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.779603140855528%2C-63.173023746032705&z=18">
+                                        <li>
+                                            Suc. Argomosa Esq. Charcas
+                                        </li>
+                                    </a>-->
+                                    <!--<a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.782650601494502%2C-63.16428917560195&z=18">
+                                        <li>
+                                            Suc. Virgen de Cotoca 2do anillo
+                                        </li>
+                                    </a>-->
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.774916263521035%2C-63.135076742397295&z=18">
+                                        <li>
+                                            Suc. Virgen de Cotoca 5to anillo
+                                        </li>
+                                    </a>
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.836593299409376%2C-63.1273547754631&z=18">
+                                        <li>
+                                            Suc. Mechero Av. Paurito
+                                        </li>
+                                    </a>
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.812466437175857%2C-63.13631075669614&z=18">
+                                        <li>
+                                            Suc. Radial 10 Esq. Che Guevara
+                                        </li>
+                                    </a>
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.765803818775368%2C-63.14944758225373&z=18">
+                                        <li>
+                                            Suc. Paragua 4to anillo
+                                        </li>  
+                                    </a>
+                                </ul>
+                            </p>
+                            <p class="Subtitle">
+                                ZONA SUR
+                            </p>
+                            <p class="Suc">
+                                <ul class="listinfo">
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.814328395595624%2C-63.18289473075789&z=18">
+                                        <li>
+                                            Suc. Santo Dumont 3er anillo
+                                        </li>
+                                    </a>
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.8242025961878%2C-63.20633817790984&z=18">
+                                        <li>
+                                            Suc. Av. Vallegrande 5to anillo
+                                        </li>
+                                    </a>
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.850033281023073%2C-63.18292836805344&z=18">
+                                        <li>
+                                            Suc. Santo Dumont 6to y 7mo anillo
+                                        </li>
+                                    </a>
+                                    <br/>
+                                </ul>
+                            </p>
+                    </div>
+                    <div class="col-md-5">
+                            <p class="Subtitle">
+                                ZONA OESTE
+                            </p>
+                            <p class="Suc">
+                                <ul class="listinfo">
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.79044594867112%2C-63.195038987152216&z=18">
+                                        <li>
+                                            Suc. Piraí 2do anillo
+                                        </li>
+                                    </a>
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.790276929879603%2C-63.20481776498764&z=18">
+                                        <li>
+                                            Suc. Chiriguano 3er anillo
+                                        </li>
+                                    </a>
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.820043089263933%2C-63.21809250256561&z=18">
+                                        <li>
+                                            Suc. Grigota 5to anillo San Francisco
+                                        </li>
+                                    </a>
+                                    <!--<a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.80104162263941%2C-63.18773622016357&z=18">
+                                        <li>
+                                            Suc. Tomas de Lexzo 2do anillo
+                                        </li>
+                                    </a>
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.80152723592246%2C-63.19723597553254&z=18">
+                                        <li>
+                                            Suc. Grigota esq. Barrientos
+                                        </li>
+                                    </a>-->
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.792615851313172%2C-63.182335392129076&z=18">
+                                        <li>
+                                            Suc. Irala #564
+                                        </li>
+                                    </a>
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.799082779528142%2C-63.220902265493336&z=18">
+                                        <li>
+                                            Suc. Av. Piraí Santa Mónica
+                                        </li>
+                                    </a>
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.77520601218042%2C-63.18384203341766&z=18">
+                                        <li>
+                                            Suc. Cañoto esq. Libertad
+                                        </li>
+                                    </a>
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.765335519333338%2C-63.196213244581614&z=18">
+                                        <li>
+                                            Suc. San Martin Equipetrol 3er y 2do anillo
+                                        </li>
+                                    </a>
+                                </ul>
+                            </p>
+                            <p>
+                                <img src="{{ 'LOGO_LEGAL.png' | asset_url }}" style="width: 30%; heigth: 30%"/>
+                            </p>
+                            <p class="Subtitle">
+                                Atención de 9:00am a 21:00pm
+                            </p>
+                            <p class="Subtitle">
+                                ZONA NORTE
+                            </p>
+                            <p class="Suc">
+                                <ul class="listinfo">
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.75054393947503%2C-63.16964293247676&z=18">
+                                        <li>
+                                                Suc. Beni 4to anillo
+                                        </li>
+                                    </a>
+                                </ul>
+                            </p>  
+                            <p class="Subtitle">
+                                ZONA ESTE
+                            </p>
+                            <p class="Suc">
+                                <ul class="listinfo">
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.784140416056587%2C-63.17219995891994&z=18">
+                                        <li>
+                                            Suc. Viedma esq Ballivian
+                                        </li>
+                                    </a>
+                                </ul>
+                            </p>
+                            <p class="Subtitle">
+                                ZONA OESTE
+                            </p>
+                            <p class="Suc">
+                                <ul class="listinfo">
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.78363579631548%2C-63.18922656495409&z=18">
+                                        <li>
+                                            Suc. Cañoto esq. Junín
+                                        </li>
+                                    </a>
+                                    <a href="https://www.google.com/maps/d/edit?hl=es&mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ll=-17.79223558289906%2C-63.17984136849054&z=18">
+                                        <li>
+                                            Suc. Irala Santiesteban
+                                        </li>
+                                    </a>
+                                </ul>
+                            </p>
+                    </div>
+                </div>
+            </div>
+            <div class="section-title text-center" id="info">  
+                <a href="tel:+59177755555">
+                <p>
+                    <img src="{{ 'boton_Inf.png' | asset_url }}" width="40%"/>
+                </p>
+                </a>
+                <p class="Subtitle" style="padding: 1px;">
+                    Horario de atención enfermerías: De 7:00 a 23:00
+                </p> 
+            </div>
+        </div>
+        <div class="mapa">
+            <iframe 
+                style="border:0"
+                loading="lazy"  
+                allowfullscreen
+                src="https://www.google.com/maps/d/embed?mid=1u2q0g3Jzdt9u2qpC8FAxvwf5L0QwZcAZ&ehbc=2E312F" width="100%" height="480">
+            </iframe>
+        </div>
+    </div>
+</body>
+</html>

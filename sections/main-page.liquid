@@ -1,0 +1,460 @@
+<link rel="stylesheet" href="{{ 'section-main-page.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'section-main-page.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+
+<style>
+
+  .bienes_page_map{
+    text-align: center;
+  }
+
+  .page_content .bienes_page_map iframe{
+    display: block;
+    margin: auto;
+    max-width: 100%;
+  }
+  
+</style>
+
+<div class="page-width">
+  {% unless section.settings.hide_title %}
+  <h1 class="main-page-title page-title h0">
+    {{ page.title | escape }}
+  </h1>
+  {% endunless %}
+  <div class="rte {% if page.handle contains 'bienes-raices' %}page_content{% endif %}">
+    {{ page.content }}
+
+{% if page.handle contains 'bienes-raices' %}
+<form class="real_estate">
+<div class="step_1 form-width">
+<h5>1. Información del propietario</h5>
+<div class="input-grid">
+<label>Nombre</label>
+<input type="text" value="" class="Nombre">
+</div>
+<div class="input-grid">
+<label>Apellido</label>
+<input type="text" value="" class="Nombre">
+</div>
+<div class="input-grid">
+<label>Celular</label>
+<input type="tel" value="" class="Nombre">
+</div>
+<div class="input-grid">
+<label>Email</label>
+<input type="email" value="" class="Nombre">
+</div>
+</div>
+
+<div class="step_2 form-width">
+
+<h5>2. Información del inmueble</h5>
+
+<div class="input-grid">
+<label>Ciudad</label>
+<select id="Ciudad">
+<option value="">Seleccionar ciudad</option>
+<option value="">Seleccionar ciudad</option>
+<option value="">Seleccionar ciudad</option>
+</select>
+
+</div>
+<div class="input-grid">
+<label>Dirección de la propiedad</label>
+<input type="text" value="" class="Dirección">
+</div>
+<div class="input-grid">
+<label>Metros cuadrados</label>
+<input type="text" value="" class="Metros">
+</div>
+<div class="input-grid">
+<label>Tipo de inmueble</label>
+<select id="Tipo">
+<option value="">Tipo de inmuebe</option>
+<option value="">Tipo de inmuebe</option>
+<option value="">Tipo de inmuebe</option>
+</select>
+</div>
+<div class="input-grid">
+<label>Referencia adicional</label>
+<input type="text" value="" class="Referencia">
+</div>
+<div class="input-grid">
+<label>Notas adicionales</label>
+<textarea  rows="5" name="" class="Notas"></textarea>
+</div>
+
+</div>
+
+<div class="step_3 form-width">
+<h5>3. Selecciona tu ubicación</h5>
+</div>
+
+  {% comment %}
+ <img src="{{ 'Map.png' | asset_img_url : '1800x' }}" >
+  {% endcomment %}
+
+  <div class="bienes_page_map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d20083846.446409307!2d-20.3231447!3d52.0862573!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c67000fc643e69%3A0x3db600f1c33c11a6!2sFarmaco-Logica%20B.V.!5e0!3m2!1sen!2sin!4v1658742321158!5m2!1sen!2sin" width="1200" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+  </div>
+  
+<div id="googleMap" style="width:100%;height:400px;"></div>
+
+<div class="step_4 form-width">
+<h5>4. Subir fotografías / Videos del inmueble</h5>
+<p class="upload-heading">Subir fotografías <span>(máximo 10 fotos)</span></p>
+<!-- Upload Area -->
+<div id="uploadArea" class="upload-area">
+
+
+  <!-- Drop Zoon -->
+  <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
+    <span class="drop-zoon__icon">
+      <img src="{{ 'Icon.png' | asset_img_url : '20x' }}">
+    </span>
+    <p class="drop-zoon__paragraph">Haga clic para subir <span>o arrastrar y soltar</span></p>
+    <span class="supported_formats">PNG, JPG (máximo 4mb)</span>
+    <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
+    <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
+    <input type="file" id="fileInput" class="drop-zoon__file-input" accept="image/*">
+  </div>
+  <!-- End Drop Zoon -->
+
+  <!-- File Details -->
+  <div id="fileDetails" class="upload-area__file-details file-details">
+    <h3 class="file-details__title">Uploaded File</h3>
+
+    <div id="uploadedFile" class="uploaded-file">
+      <div class="uploaded-file__icon-container">
+        <i class='bx bxs-file-blank uploaded-file__icon'></i>
+        <span class="uploaded-file__icon-text"></span> <!-- Data Will be Comes From Js -->
+      </div>
+
+      <div id="uploadedFileInfo" class="uploaded-file__info">
+        <span class="uploaded-file__name">Proejct 1</span>
+        <span class="uploaded-file__counter">0%</span>
+      </div>
+    </div>
+  </div>
+  <!-- End File Details -->
+</div>
+<!-- End Upload Area -->
+
+<p class="upload-heading">Subir videos <span>(máximo 5 videos)</span></p>
+<!-- Upload Area -->
+<div id="uploadArea" class="upload-area">
+
+
+  <!-- Drop Zoon -->
+  <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
+    <span class="drop-zoon__icon">
+      <img src="{{ 'Icon.png' | asset_img_url : '20x' }}">
+    </span>
+    <p class="drop-zoon__paragraph">Haga clic para subir <span>o arrastrar y soltar</span></p>
+    <span class="supported_formats">PNG, JPG (máximo 4mb)</span>
+    <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
+    <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
+    <input type="file" id="fileInput" class="drop-zoon__file-input" accept="image/*">
+  </div>
+  <!-- End Drop Zoon -->
+
+  <!-- File Details -->
+  <div id="fileDetails" class="upload-area__file-details file-details">
+    <h3 class="file-details__title">Uploaded File</h3>
+
+    <div id="uploadedFile" class="uploaded-file">
+      <div class="uploaded-file__icon-container">
+        <i class='bx bxs-file-blank uploaded-file__icon'></i>
+        <span class="uploaded-file__icon-text"></span> <!-- Data Will be Comes From Js -->
+      </div>
+
+      <div id="uploadedFileInfo" class="uploaded-file__info">
+        <span class="uploaded-file__name">Proejct 1</span>
+        <span class="uploaded-file__counter">0%</span>
+      </div>
+    </div>
+  </div>
+  <!-- End File Details -->
+</div>
+<!-- End Upload Area -->
+
+<button type="submit" class="submit_estate">Enviar</button>
+
+</div>
+
+</form>
+
+{% endif %}
+
+  </div>
+</div>
+
+<script src="//maps.googleapis.com/maps/api/js?key="></script>
+
+ <script>
+      
+    
+// Select Upload-Area
+const uploadArea = document.querySelector('#uploadArea')
+
+// Select Drop-Zoon Area
+const dropZoon = document.querySelector('#dropZoon');
+
+// Loading Text
+const loadingText = document.querySelector('#loadingText');
+
+// Slect File Input 
+const fileInput = document.querySelector('#fileInput');
+
+// Select Preview Image
+const previewImage = document.querySelector('#previewImage');
+
+// File-Details Area
+const fileDetails = document.querySelector('#fileDetails');
+
+// Uploaded File
+const uploadedFile = document.querySelector('#uploadedFile');
+
+// Uploaded File Info
+const uploadedFileInfo = document.querySelector('#uploadedFileInfo');
+
+// Uploaded File  Name
+const uploadedFileName = document.querySelector('.uploaded-file__name');
+
+// Uploaded File Icon
+const uploadedFileIconText = document.querySelector('.uploaded-file__icon-text');
+
+// Uploaded File Counter
+const uploadedFileCounter = document.querySelector('.uploaded-file__counter');
+
+// ToolTip Data
+const toolTipData = document.querySelector('.upload-area__tooltip-data');
+
+// Images Types
+const imagesTypes = [
+  "jpeg",
+  "png",
+  "svg",
+  "gif"
+];
+
+// Append Images Types Array Inisde Tooltip Data
+toolTipData.innerHTML = [...imagesTypes].join(', .');
+
+// When (drop-zoon) has (dragover) Event 
+dropZoon.addEventListener('dragover', function (event) {
+  // Prevent Default Behavior 
+  event.preventDefault();
+
+  // Add Class (drop-zoon--over) On (drop-zoon)
+  dropZoon.classList.add('drop-zoon--over');
+});
+
+// When (drop-zoon) has (dragleave) Event 
+dropZoon.addEventListener('dragleave', function (event) {
+  // Remove Class (drop-zoon--over) from (drop-zoon)
+  dropZoon.classList.remove('drop-zoon--over');
+});
+
+// When (drop-zoon) has (drop) Event 
+dropZoon.addEventListener('drop', function (event) {
+  // Prevent Default Behavior 
+  event.preventDefault();
+
+  // Remove Class (drop-zoon--over) from (drop-zoon)
+  dropZoon.classList.remove('drop-zoon--over');
+
+  // Select The Dropped File
+  const file = event.dataTransfer.files[0];
+
+  // Call Function uploadFile(), And Send To Her The Dropped File :)
+  uploadFile(file);
+});
+
+// When (drop-zoon) has (click) Event 
+dropZoon.addEventListener('click', function (event) {
+  // Click The (fileInput)
+  fileInput.click();
+});
+
+// When (fileInput) has (change) Event 
+fileInput.addEventListener('change', function (event) {
+  // Select The Chosen File
+  const file = event.target.files[0];
+
+  // Call Function uploadFile(), And Send To Her The Chosen File :)
+  uploadFile(file);
+});
+
+// Upload File Function
+function uploadFile(file) {
+  // FileReader()
+  const fileReader = new FileReader();
+  // File Type 
+  const fileType = file.type;
+  // File Size 
+  const fileSize = file.size;
+
+  // If File Is Passed from the (File Validation) Function
+  if (fileValidate(fileType, fileSize)) {
+    // Add Class (drop-zoon--Uploaded) on (drop-zoon)
+    dropZoon.classList.add('drop-zoon--Uploaded');
+
+    // Show Loading-text
+    loadingText.style.display = "block";
+    // Hide Preview Image
+    previewImage.style.display = 'none';
+
+    // Remove Class (uploaded-file--open) From (uploadedFile)
+    uploadedFile.classList.remove('uploaded-file--open');
+    // Remove Class (uploaded-file__info--active) from (uploadedFileInfo)
+    uploadedFileInfo.classList.remove('uploaded-file__info--active');
+
+    // After File Reader Loaded 
+    fileReader.addEventListener('load', function () {
+      // After Half Second 
+      setTimeout(function () {
+        // Add Class (upload-area--open) On (uploadArea)
+        uploadArea.classList.add('upload-area--open');
+
+        // Hide Loading-text (please-wait) Element
+        loadingText.style.display = "none";
+        // Show Preview Image
+        previewImage.style.display = 'block';
+
+        // Add Class (file-details--open) On (fileDetails)
+        fileDetails.classList.add('file-details--open');
+        // Add Class (uploaded-file--open) On (uploadedFile)
+        uploadedFile.classList.add('uploaded-file--open');
+        // Add Class (uploaded-file__info--active) On (uploadedFileInfo)
+        uploadedFileInfo.classList.add('uploaded-file__info--active');
+      }, 500); // 0.5s
+
+      // Add The (fileReader) Result Inside (previewImage) Source
+      previewImage.setAttribute('src', fileReader.result);
+
+      // Add File Name Inside Uploaded File Name
+      uploadedFileName.innerHTML = file.name;
+
+      // Call Function progressMove();
+      progressMove();
+    });
+
+    // Read (file) As Data Url 
+    fileReader.readAsDataURL(file);
+  } else { // Else
+
+    this; // (this) Represent The fileValidate(fileType, fileSize) Function
+
+  };
+};
+
+// Progress Counter Increase Function
+function progressMove() {
+  // Counter Start
+  let counter = 0;
+
+  // After 600ms 
+  setTimeout(() => {
+    // Every 100ms
+    let counterIncrease = setInterval(() => {
+      // If (counter) is equle 100 
+      if (counter === 100) {
+        // Stop (Counter Increase)
+        clearInterval(counterIncrease);
+      } else { // Else
+        // plus 10 on counter
+        counter = counter + 10;
+        // add (counter) vlaue inisde (uploadedFileCounter)
+        uploadedFileCounter.innerHTML = `${counter}%`
+      }
+    }, 100);
+  }, 600);
+};
+
+
+// Simple File Validate Function
+function fileValidate(fileType, fileSize) {
+  // File Type Validation
+  let isImage = imagesTypes.filter((type) => fileType.indexOf(`image/${type}`) !== -1);
+
+  // If The Uploaded File Type Is 'jpeg'
+  if (isImage[0] === 'jpeg') {
+    // Add Inisde (uploadedFileIconText) The (jpg) Value
+    uploadedFileIconText.innerHTML = 'jpg';
+  } else { // else
+    // Add Inisde (uploadedFileIconText) The Uploaded File Type 
+    uploadedFileIconText.innerHTML = isImage[0];
+  };
+
+  // If The Uploaded File Is An Image
+  if (isImage.length !== 0) {
+    // Check, If File Size Is 2MB or Less
+    if (fileSize <= 2000000) { // 2MB :)
+      return true;
+    } else { // Else File Size
+      return alert('Please Your File Should be 2 Megabytes or Less');
+    };
+  } else { // Else File Type 
+    return alert('Please make sure to upload An Image File Type');
+  };
+};
+
+
+      
+
+    </script>
+
+ <!--function init1() {
+            var mapOptions = {
+                zoom: 18,
+                center: new google.maps.LatLng(-17.7655458,-63.1955802),
+                disableDefaultUI: true
+            };
+
+            var mapElement = document.getElementById('googleMap');
+            var map = new google.maps.Map(mapElement, mapOptions); 
+            var icon = {
+              url: '//cdn.shopify.com/s/files/1/0465/8479/1197/files/map-icon2.png?v=14035484389954404967'
+            };
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(-17.7655458,-63.1955802),
+                map: map
+            });
+            var closestDisplayCenter = '';
+            var markersA = [];
+            }
+            jQuery(document).ready(function () {
+                if (jQuery('#googleMap').length > 0) {
+                    google.maps.event.addDomListener(window, 'load', init1);
+                }
+            });
+
+            jQuery(window).resize(function () {
+                if (jQuery('#googleMap').length > 0) {
+                setTimeout(function () {
+                    google.maps.event.addDomListener(window, 'load', init1);
+                    google.maps.event.trigger(map, "resize");
+                }, 250);
+            }
+        });
+-->
+
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "tag": "section",
+  "class": "spaced-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "hide_title",
+      "label": "Hide Page Title"
+    }
+  ]
+}
+{% endschema %}

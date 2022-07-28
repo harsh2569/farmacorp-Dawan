@@ -1,0 +1,111 @@
+<style>
+  div[section={{section.id }}] {
+    padding-top: {{ section.settings.mt_large }}px;
+    padding-bottom: {{ section.settings.mb_large }}px;    
+  }
+
+  div[section={{section.id }}] div {
+    background: {{ section.settings.background }};
+    height: {{ section.settings.height }}px;
+    font-size: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    div[section={{section.id }}] {
+      padding-top: {{ section.settings.mt_small }}px;
+      padding-bottom: {{ section.settings.mb_small }}px;
+    }
+    
+  }
+
+  @media screen and (min-width: 749px) {
+    .mobile_divider_show {
+    display: none;
+    }
+
+  } 
+</style>
+
+<div section="{{ section.id }}" {% if section.settings.mob_show_only == true %}class="mobile_divider_show"{% endif %}>
+  <div>Section divider</div>
+</div>
+
+
+
+
+{% schema %}
+{
+  "name": "Section Divider",
+  "class" : "section-divider",
+  "settings": [
+  {
+      "type": "checkbox",
+      "id": "mob_show_only",
+      "label": "Only Mobile Show"
+    },
+    {
+      "type": "color_background",
+      "id": "background",
+      "label": "Background"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "default": 10,
+      "label": "Height"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "mt_large",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 30,
+      "unit": "px",
+      "label": "Margin Top(Large Screens)"
+    },
+    {
+      "type": "range",
+      "id": "mb_large",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 30,
+      "unit": "px",
+      "label": "Margin Bottom(Large Screens)"
+    },
+    {
+      "type": "range",
+      "id": "mt_small",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 30,
+      "unit": "px",
+      "label": "Margin Top(Small Screens)"
+    },
+    {
+      "type": "range",
+      "id": "mb_small",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 30,
+      "unit": "px",
+      "label": "Margin Bottom(Small Screens)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section Divider"
+    }
+  ]
+}
+{% endschema %}

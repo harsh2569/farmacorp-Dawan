@@ -1,0 +1,133 @@
+.blog__post {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-template-rows: repeat(2,1fr);
+  height: 54rem;   
+}
+
+.blog-post__component {
+  padding: 2rem;
+  position: relative;
+}
+
+.blog-post__component:nth-child(1) {
+  grid-column: 1/3;
+  grid-row: 1/3;
+}
+
+.blog__badge {
+  color: #2D74FF;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  letter-spacing: -0.5px;
+  background: #D5E3FF;
+  border-radius: 20px;
+  padding: 3px 10px;
+}
+
+.blog-post__component h2 {
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 70px;
+  letter-spacing: -3px;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+.blog-post__component h3 {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 34px;
+  letter-spacing: -0.8px;
+  margin-top: 2rem;
+  margin-bottom: 5.4rem;
+}
+
+.blog-post__component .button {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  letter-spacing: -0.3px;
+  background: #000000;
+  border-radius: 10px;
+  padding: 15px 16px;
+}
+
+.blog__date {
+  position: absolute;
+  bottom: 2rem;
+  display: flex;
+  align-items: center;
+  grid-gap: 1rem;
+}
+
+@media screen and (min-width: 989px) {
+  .blog__post {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-bottom: 3rem;
+  }
+
+  .blog-post__component:nth-child(1)::after {
+    content: "";
+    position: absolute;
+    height: calc(100% - 40px);
+    right: 0;
+    top: 2rem;
+    background: rgba(0, 0, 0, 0.1);
+    width: 1px;
+  }
+
+  .blog-post__component:nth-child(2)::after {
+    content: "";
+    position: absolute;
+    width: calc(100% - 20px);
+    right: 0;
+    bottom: 0;
+    border-bottom: 1px solid;
+    border-color: rgba(0, 0, 0, 0.1);    
+  }
+
+  .blog-post__component:nth-child(3)::after {
+    content: "";
+    position: absolute;
+    width: calc(100% - 20px);
+    left: 0;
+    bottom: 0;
+    border-bottom: 1px solid;
+    border-color: rgba(0, 0, 0, 0.1);    
+  }
+}
+
+@media screen and (max-width: 989px) {
+  .blog__post {
+    height: 100%;
+    display: block;
+  }
+
+  .blog-post__component {
+    padding-left: 0;
+    padding-right: 0;
+    border-bottom: 1px solid;
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .blog-post__component h2 {
+    font-size: 28px;
+    line-height: 34px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    margin-top: 1rem;
+    margin-bottom: 2.8rem;
+  }
+
+  .blog-post__component .button {
+    margin-bottom: 36px;
+  }
+
+  .blog__date {
+    position: static;
+  }
+}

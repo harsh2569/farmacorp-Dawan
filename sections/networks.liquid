@@ -1,0 +1,88 @@
+<style>
+  .network__grid{
+    text-align: center;
+}
+
+  .network__text{
+    font-size: 6.4rem;
+    line-height: 7rem;
+    font-weight: 500;
+    letter-spacing: -3px;
+    color: #FFFFFF;
+    margin-bottom: 2rem;
+}
+
+  .network__subtext{
+    font-size: 2.4rem;
+    line-height: 3rem;
+    letter-spacing: -1px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 3.8rem;
+}
+
+</style>
+
+
+<div class="networks" style="background-color: {{ section.settings.background-color }};">
+    <div class="page-width">
+        <div class="grid grid--3-col network__grid">
+            {% for block in section.blocks %}
+                <div class="grid__item">
+                    {% if block.settings.text != blank %}
+                        <p class="network__text">{{ block.settings.text }}</p>
+                    {% endif %}
+                    {% if block.settings.subtext != blank %}
+                        <p class="network__subtext">{{ block.settings.subtext }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% schema %}
+{
+    "name": "Network",
+    "class": "spaced-section",
+    "settings": [
+        {
+            "type": "color",
+            "id": "background-color",
+            "label": "Background Color"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "text",
+            "name": "Networks",
+            "settings": [
+                {
+                    "type": "textarea",
+                    "id": "text",
+                    "label": "Text"
+                },
+                {
+                    "type": "textarea",
+                    "id": "subtext",
+                    "label": "Subtext"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Networks",
+            "blocks": [
+                {
+                    "type": "text"
+                },
+                {
+                    "type": "text"
+                },
+                {
+                    "type": "text"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

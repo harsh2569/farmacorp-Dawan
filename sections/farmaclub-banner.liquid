@@ -1,0 +1,141 @@
+<style>
+    .farmaclub-banner-section {
+        padding: 3.2rem 0 4.5rem;
+        background: #FCFCFC;
+    }
+    .fh-inner {
+        text-align: center;
+    }
+    .fh-buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.7rem;
+    }
+    .fh-buttons .button {
+        font-size: 1.4rem;
+        line-height: 2rem;
+        min-height: 3.6rem;
+        padding: 0.8rem 1.2rem;
+        min-width: initial;
+        box-shadow: none !important;
+    }
+    .fh-buttons .button--farmaLight {
+        background: var(--color-lightFarmaclub) !important;
+        color: var(--color-farmaclub);
+    }
+    .fh-buttons .button--secondary {
+        color: var(--color-lightGray);
+    }
+    .fh-buttons .button:last-child {
+        margin-left: 0.8rem;
+    }
+    .farmaclub__logo {
+        margin-bottom: 1.7rem;
+    }
+    .farmaclub__logo svg {
+        width: 26rem;
+        height: 4.2rem;
+    }
+    .fh-desc {
+        font-weight: 600;
+        font-size: 2rem;
+        line-height: 3rem;
+        text-align: center;
+        color: var(--color-black-0);
+    }
+    @media screen and (max-width: 767px) {
+        .farmaclub-banner-section {
+            padding: 1.5rem 0 3rem;
+        }
+        .farmaclub__logo svg {
+            width: 18.4rem;
+            height: 3rem;
+        }
+        .fh-buttons button {
+            font-size: 1.2rem;
+            line-height: 1.8rem;
+            min-height: 3.4rem;
+        }
+        .fh-desc {
+            font-size: 1.4rem;
+            line-height: 2rem;
+        }
+    }
+</style>
+{% capture sectionContent %}
+<div class="farmaclub-banner-section">
+    <div class="page-width">
+        <div class="fh-inner">
+            <div class="fh-buttons">
+                {% if section.settings.btn_text1 != blank %}<a href="{{ section.settings.btn_url1 }}" class="button {% if template == 'collection' and collection.handle == 'farmaclub' %} button--farmaLight {% else %} button--secondary {% endif %}">{{ section.settings.btn_text1 }}</a>{% endif %}
+                {% if section.settings.btn_text2 != blank %}<a href="{{ section.settings.btn_url2 }}" class="button {% if template == 'collection' and collection.handle == 'farmaclub' %} button--secondary {% else %} button--farmaLight {% endif %}">{{ section.settings.btn_text2 }}</a>{% endif %}
+            </div>
+            <div class="farmaclub__logo">{% render 'icon-farmaclub' %}</div>
+            {% if section.settings.desc != blank %}<div class="fh-desc">{{ section.settings.desc }}</div> {% endif %}
+        </div>
+    </div>
+</div>
+{% endcapture%}
+{% if template == 'collection' and collection.handle == 'farmaclub' %}
+{{sectionContent}}
+{% elsif template != 'collection' %}
+{{ sectionContent }}
+{% endif %}
+
+{% if collection.metafields.my_fields.collection_image != blank %}
+<div class="page-width collection_banner_main">
+    <img class="collection_custom_banner" src="{{ collection.metafields.my_fields.collection_image | file_url }}">
+
+</div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Farmaclub Banner",
+  "tag": "section",
+  "class": "banner-section",
+  "settings": [
+    {
+        "type": "text",
+        "id": "btn_text1",
+        "label": "Button Text",
+        "default": "Catálogo"
+    },
+    {
+        "type": "url",
+        "id": "btn_url1",
+        "label": "Button Url"
+    },
+    {
+        "type": "text",
+        "id": "btn_text2",
+        "label": "Button Text",
+        "default": "Catálogo"
+    },
+    {
+        "type": "url",
+        "id": "btn_url2",
+        "label": "Button Url"
+    },
+    {
+        "type": "textarea",
+        "id": "desc",
+        "label": "Text",
+        "default": "Canjea tus puntos por productos"
+    }
+   
+  ],
+  "presets": [
+    {
+      "name": "Farmaclub Banner"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+    .collection_banner_main .collection_custom_banner {
+    width: 100%;
+}
+</style>

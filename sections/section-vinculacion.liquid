@@ -1,0 +1,196 @@
+<style>
+    .custom-form-wrap {
+        margin: 4.4rem 0 12rem;
+    }
+    .custom-form-wrap .field:not(.field-check) {
+        display: block;
+    }    
+    .custom-form-container {
+        max-width: 46rem;
+        margin: 0 auto;
+    }
+    .forms-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    .farmaclub__logo svg {
+        width: 24.2rem;
+        height: 4.2rem;
+    }
+    .custom-form-wrap h2 {
+        text-align: center;
+        font-weight: 600;
+        font-size: 3.2rem;
+        line-height: 3.9rem;
+        letter-spacing: -0.2px;
+        color: var(--color-black-0);
+        margin-bottom: 3rem;
+    }
+    .form-footer {
+        display: flex;
+        padding-top: 20px;
+    }
+    .flex-center {
+        justify-content: center;
+    }
+    .form-footer button {
+        padding: 0.8rem 2rem;
+        min-height: 4rem;
+    }
+    .form-footer .button--secondary {
+        margin-right: 20px;
+        padding: 0;
+        min-width: initial;
+        color: var(--color-lightGray);
+    }
+    input[type=checkbox].field__checkbox {
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+        margin: 0 0.8rem 0 0;
+    }
+    .checkbox-label {
+        color: var(--color-darkGray);
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0;
+    }
+    .form__subtext {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        color: #545454;
+        margin: 0 0 15px;
+    }
+    .success-form-wrap {
+        text-align: center;
+    }
+    .success-form-wrap h3 {
+        font-weight: 500;
+        font-size: 2rem;
+        line-height: 3rem;
+        margin-bottom: 0.8rem;
+    }
+    .success-form-wrap .form__subtext {
+        margin-bottom: 2.4rem;
+    }
+    .success-form-wrap .success-icon {
+        margin-bottom: 1.6rem;
+    }
+    .success-form-wrap .form__subtext {
+        margin: 0 0 4px;
+    }
+    .farmaclub-form-sections-wrap .farmaclub-form-section:not(:first-child) {
+        display: none;
+    }
+    @media screen and (min-width: 1440px) {
+        .custom-form-container {
+            max-width: 70rem;
+        }
+    }
+    @media screen and (max-width: 767px) {
+        .custom-form-wrap {
+            margin: 4rem 0 5.3rem;
+        }
+        .farmaclub__logo svg {
+            width: 18.4rem;
+            height: 3rem;
+        }
+        .custom-form-wrap h2 {
+            font-size: 1.8rem;
+            line-height: 2.8rem;
+            margin-bottom: 3.5rem;
+        }
+        .form-footer {
+            flex-direction: column-reverse;
+        }
+        .form-footer .button--secondary {
+            min-height: initial;
+            margin-top: 18px;
+            padding: 5px;
+            margin-right: 0;
+        }
+    }
+</style>
+<div class="custom-form-wrap">
+    <div class="page-width custom-form-container">
+        <div class="forms-header">
+            <div class="farmaclub__logo">{% render 'icon-farmaclub' %}</div>
+        </div>
+        <div class="farmaclub-form-sections-wrap">
+            <div class="membership-form-wrap farmaclub-form-section">
+                <h2>Únase o agrege su membresía Farmaclub.</h2>
+                <form id="membership-form">
+                    <div class="field">
+                        <label class="field__label" for="ïd_num">Número de carnet de identidad</label>
+                        <input type="text" id="ïd_num" name="ïd_num" class="field__input" placeholder="Ingrese su número de CI" />
+                    </div>
+                    <div class="field field-check">
+                        <input type="checkbox" id="terms_accept" name="terms_accept" class="field__checkbox" />
+                        <label class="field__label checkbox-label" for="terms_accept">Acepto todos los <a href="javascript:void(0)" class="">terminos y condiciones</a></label>
+                    </div>
+                    <div class="form-footer flex-center">
+                        <a href="/pages/farmaclub" class="button button--secondary">Volver</a>
+                        <button type="button" class="button button--farmaclub button-submit ">Continuar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="verify-form-wrap farmaclub-form-section">
+                <h2>Verifique sus datos</h2>
+                <form id="verify-form">
+                    <div class="field">
+                        <label class="field__label" for="ïd_num">Nombre</label>
+                        <input type="text" id="ïd_num" name="ïd_num" class="field__input" placeholder="Juan Carlos" />
+                    </div>
+                    <div class="field">
+                        <label class="field__label" for="ïd_num">Apellido</label>
+                        <input type="text" id="ïd_num" name="ïd_num" class="field__input" placeholder="Ortiz Soria" />
+                    </div>
+                    <div class="field">
+                        <label class="field__label" for="ïd_num">Carnet de identidad</label>
+                        <input type="text" id="ïd_num" name="ïd_num" class="field__input" placeholder="7127546" />
+                    </div>
+                    <div class="field">
+                        <label class="field__label" for="ïd_num">Correo</label>
+                        <input type="text" id="ïd_num" name="ïd_num" class="field__input" placeholder="ortiz92@gmail.com" />
+                    </div>
+                    <div class="field">
+                        <label class="field__label" for="ïd_num">Celular</label>
+                        <input type="text" id="ïd_num" name="ïd_num" class="field__input" placeholder="64837643" />
+                    </div>
+                    <p class="form__subtext">Si ingresaste otro número de identidad da clic en volver para volver a intentarlo</p>
+                    <div class="form-footer">
+                        <a href="/pages/farmaclub" class="button button--secondary">Volver</a>
+                        <button type="button" class="button button--farmaclub button-submit">Mis datos son correctos</button>
+                    </div>
+                </form>
+            </div>
+            <div class="success-form-wrap farmaclub-form-section">
+                <div class="success-icon">
+                    {% render 'icon-form-success' %}
+                </div>
+                <h3>Cuenta agregada con éxito</h3>
+                <p class="form__subtext">Su cuenta fue agregada con éxito, ahora todas tus compras tienen benefícios</p>
+                <div class="form-footer flex-center">
+                    <button type="button" class="button button--farmaclub button-submit button--full-width">Continuar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $(document).on('click', '.button-submit', function() {
+            $(this).closest('.farmaclub-form-section').hide().next().fadeIn(300);
+        });
+    })
+</script>
+
+{% schema %}
+{
+  "name": "Vinculacion",
+  "tag": "section",
+  "class": "Vinculacion-section",
+  "settings": []
+}
+{% endschema %}

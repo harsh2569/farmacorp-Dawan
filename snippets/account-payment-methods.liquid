@@ -1,0 +1,252 @@
+<!--  
+  snippets/account-change-password.liquid
+-->
+
+<style>
+  #paymentMethods,
+  #paymentMethods:target ~ * {
+    display: none;
+  }
+
+  #paymentMethods:target {
+    display: block;
+  }
+
+  #add-payment-method {
+    max-width: 798px;
+    margin-top: 0;
+    display: none;
+  }
+
+  .security-message {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: #545454;
+    margin-bottom: 5.3rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .security-message svg {
+    margin-right: 1rem;
+  }
+
+  /* Listing */
+
+  .payment-method__listing {    
+    border-top: 1px solid #E4E7EC;
+    padding-top: 2.5rem;
+  }
+  .payment-method__listing-header h5 {
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    color: #545454;
+  }
+
+  .payment-method__listing-header span {
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    color: #000000;
+  }
+
+  .payment-method__listing ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 2.3rem;
+  }
+
+  .payment-method__listing li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.2rem;
+    padding: 1.6rem;
+    border: 1px solid #E4E7EC;
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .payment-method__listing li:last-child {
+    margin-bottom: 0;
+  }
+
+  
+
+  .payment-method__details {
+    padding-left: 1.2rem;
+  }
+
+  .payment-method__details div {
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+
+  .payment-method__details div:first-child {
+    font-weight: 500;
+  }
+
+  .payment-method__details div:last-child {
+    margin-top: 0.8rem;
+  }
+
+    .payment-method__details div:last-child a {
+        margin-left: 1.2rem;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+  .radio-checkmarks {
+    position: absolute;
+    width: 1.6rem;
+    height: 1.6rem;
+    top: 1.6rem;
+    right: 1.6rem;
+  }
+
+  .radio-checkmarks img {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+  }
+
+  .radio-checkmarks .icon-radio-checked {
+    display: none;
+  }
+
+  .payment-method__listing li:hover,
+  .payment-method__listing li.active {
+    border-color: #0D6EFD;
+  }
+
+  .payment-method__listing li:hover .radio-checkmarks .icon-radio-unchecked,
+  .payment-method__listing li.active .radio-checkmarks .icon-radio-unchecked {
+    display: none;
+  }
+
+  .payment-method__listing li:hover .radio-checkmarks .icon-radio-checked,
+  .payment-method__listing li.active .radio-checkmarks .icon-radio-checked {
+    display: block;
+  }
+
+  .payment-methods__main a.add-payment-method {
+    display: flex;
+    align-items: center;
+    margin-right: 0.8rem;
+    margin-top: 1.6rem;
+    color: #0D6EFD;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  @media screen and (max-width: 767px) {
+    .security-message {
+      margin-bottom: 3rem;
+      align-items: flex-start;
+    }
+  }
+</style>
+
+<div id="paymentMethods">
+  <div class="payment-methods__main">
+    <h2 class="account__page-title">Métodos de pago</h2>
+    <p class="account__page-subtext">Aqui puede editar y elegir su método pago para sus compras</p>
+    <div class="payment-method__listing">
+      <div class="payment-method__listing-header">
+        <h5>Seleccione el método de pago por defecto.</h5>
+        <span>Detalles de la tarjeta</span>
+      </div> 
+      <ul>
+        <li class="active">
+          <div class="payment-method__icon">
+            {% render 'icon-visa' %}
+          </div>
+          <div class="payment-method__details">
+            <div>Visa termina en 1234</div>
+            <div>Expira 06/2024</div>
+            <div>Establecida por defecto <a href="#">Editar</a></div>          
+          </div>
+          <span class="radio-checkmarks"><img src="{{'icon-radio-checked.svg' | asset_url }}" class="icon-radio-checked" /><img src="{{'icon-radio-unchecked.svg' | asset_url }}" class="icon-radio-unchecked" /></span>
+        </li>
+        <li>
+          <div class="payment-method__icon">
+            {% render 'icon-master' %}
+          </div>
+          <div class="payment-method__details">
+            <div>Mastercard termina en 1234</div>
+            <div>Expira 06/2024</div>
+            <div>Establecida por defecto <a href="#">Editar</a></div>
+          </div>
+          <span class="radio-checkmarks"><img src="{{'icon-radio-checked.svg' | asset_url }}" class="icon-radio-checked" /><img src="{{'icon-radio-unchecked.svg' | asset_url }}" class="icon-radio-unchecked" /></span>
+        </li>
+      </ul>   
+      <a class="add-payment-method">{%- render 'icon-plus-large' -%}Añadir nuevo método pago</a>
+    </div>
+  </div>
+  <div id="add-payment-method" class="profile-form-fields">
+    <h3 class="account__page-title">Añadir métodos de pago</h3>
+    <form>
+      <div class="grid grid--1-col grid--2-col-tablet">
+        <div class="grid__item field">
+          <label for="cardNumber">
+            Número de la targeta
+          </label>
+          <input type="text"
+            required
+            name="card_number"
+            id="cardNumber"
+          >   
+        </div>
+        <div class="grid__item field">
+          <label for="cardHolderName">
+            Nombre del titular de la tarjeta            
+          </label>
+          <input type="text"
+            required
+            name="card_holder_name"
+            id="cardHolderName"
+            >   
+        </div>
+      </div>
+      <div class="grid grid--1-col grid--2-col-tablet">
+        <div class="grid__item field">
+          <label for="expiration">
+            Número de la targeta
+          </label>
+          <input type="text"
+            required
+            name="expiration"
+            placeholder="Mes/Año"
+            id="expiration"
+          >   
+        </div>
+        <div class="grid__item field">
+          <label for="CVV">
+            Nombre del titular de la tarjeta            
+          </label>
+          <input type="text"
+            required
+            name="cvv"
+            id="CVV"
+            >   
+        </div>
+      </div>
+      <div class="security-message">
+        {% render 'icon-lock' %}Su transacción está asegurada con encriptación SSL
+      </div>
+      <button type="submit" class="button button--primary">Añadir nueva targeta</button>  
+    </form>
+  </div>
+</div>
+
+<script>
+  document.querySelector('.add-payment-method').addEventListener('click', function(){
+    document.getElementById('add-payment-method').style.display = 'block';
+    document.querySelector('.payment-methods__main').style.display = 'none';
+  });
+</script>

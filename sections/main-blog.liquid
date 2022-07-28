@@ -1,0 +1,143 @@
+{{ 'component-article-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'section-main-blog.css' | asset_url | stylesheet_tag }}
+{{ 'component-blog-grid.css' | asset_url | stylesheet_tag }}
+
+  
+<div class="page-width">
+  <div class="blog__post">
+    <div class="blog-post__component">
+      <a href="/">
+        <span class="blog__badge">Salud</span>
+        <h2 class="blog__content">Se implementa tarjeta Tengo! Seguro en SCZ</h2>
+        <button class="button button--primary">Leer más</button>
+        <div class="blog__date"> {% render 'icon-watch' %} 07.08.2021</div>
+      </a>
+    </div>
+    <div class="blog-post__component">
+      <a href="/">
+        <span class="blog__badge">Salud</span>
+        <h3 class="blog__content">La vacunas aceptadas en para viajar a EE.UU</h3>        
+        <div class="blog__date"> {% render 'icon-watch' %} 07.08.2021</div>
+      </a>
+    </div>
+    <div class="blog-post__component">
+      <a href="/">
+        <span class="blog__badge">Salud</span>
+        <h3 class="blog__content">6 Maneras para gestionar el stress laboral</h3>        
+        <div class="blog__date"> {% render 'icon-watch' %} 07.08.2021</div>
+      </a>
+    </div>
+    <div class="blog-post__component">
+      <a href="/">
+        <span class="blog__badge">Salud</span>
+        <h3 class="blog__content">17 Tips para limpiar tu hogar post pandemia</h3>        
+        <div class="blog__date"> {% render 'icon-watch' %} 07.08.2021</div>
+      </a>
+    </div>
+    <div class="blog-post__component">
+      <a href="/">
+        <span class="blog__badge">Salud</span>
+        <h3 class="blog__content">The Design Side Of Conversion Rate Optimization</h3>        
+        <div class="blog__date"> {% render 'icon-watch' %} 07.08.2021</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+{%- paginate blog.articles by 6 -%}
+
+  <div class="main-blog page-width">
+    <h1 class="title--primary hidden">{{ blog.title | escape }}</h1>
+
+    <div class="blog-articles {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
+      {%- for article in blog.articles -%}
+        <div class="blog-articles__article article">
+          {%- render 'article-card', article: article, image_height: section.settings.image_height, show_image: section.settings.show_image, show_date: section.settings.show_date, show_author: section.settings.show_author -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if paginate.pages > 1 -%}
+      {%- render 'pagination', paginate: paginate -%}
+    {%- endif -%}
+  </div>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "t:sections.main-blog.name",
+  "tag": "section",
+  "class": "spaced-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.main-blog.settings.header.content"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "grid",
+          "label": "t:sections.main-blog.settings.layout.options__1.label"
+        },
+        {
+          "value": "collage",
+          "label": "t:sections.main-blog.settings.layout.options__2.label"
+        }
+      ],
+      "default": "collage",
+      "label": "t:sections.main-blog.settings.layout.label",
+      "info": "t:sections.main-blog.settings.layout.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "default": true,
+      "label": "t:sections.main-blog.settings.show_image.label"
+    },
+    {
+      "type": "select",
+      "id": "image_height",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.main-blog.settings.image_height.options__1.label"
+        },
+        {
+          "value": "small",
+          "label": "t:sections.main-blog.settings.image_height.options__2.label"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.main-blog.settings.image_height.options__3.label"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.main-blog.settings.image_height.options__4.label"
+        }
+      ],
+      "default": "medium",
+      "label": "t:sections.main-blog.settings.image_height.label",
+      "info": "t:sections.main-blog.settings.image_height.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "default": true,
+      "label": "t:sections.main-blog.settings.show_date.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "default": false,
+      "label": "t:sections.main-blog.settings.show_author.label"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-blog.settings.paragraph.content"
+    }
+  ]
+}
+{% endschema %}

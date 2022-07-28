@@ -1,0 +1,172 @@
+
+{%- style -%}
+.content-section.section-bg {
+    background-color: {{section.settings.background}};
+}
+.content-container-inner {
+    padding-top: 4.5rem;
+    padding-bottom: 7.7rem;
+}
+
+.content-section.section-bg .content-container-inner {
+    padding-top: 9rem;
+    padding-bottom: 9rem;
+}
+.content-center {
+    margin: 0 auto;
+    text-align: center;
+}
+.content-pre-heading {
+    color: var(--color-blue);
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    margin-top: 0;
+}
+
+.content-heading {
+    font-size: 3.6rem;
+    line-height: 4.4rem;
+    letter-spacing: -0.2px;
+    font-weight: 600;
+    color: var(--color-gray);
+    margin-bottom: 20px;
+}
+.content-heading.heading-large {
+    font-size: 6rem;
+    line-height: 7.2rem;
+    margin-bottom: 24px;
+}
+
+.content-text {
+    font-size: 2rem;
+    line-height: 3rem;
+    font-weight: 400;
+    color: var(--color-lightGray);
+    margin: 0;
+}
+@media screen and (min-width: 768px) {
+    .content-container-inner {
+        max-width: 60%;
+    }
+}
+@media screen and (max-width: 767px) {
+    .content-section.section-bg .content-container-inner {
+        padding-top: 6.4rem;
+        padding-bottom: 6.4rem;
+    }
+    .content-pre-heading {
+        font-size: 1.4rem;
+        line-height: 2rem;
+    }
+    .content-heading {
+        font-size: 3rem;
+        line-height: 3.8rem;
+        margin-bottom: 1.6rem;
+    }
+    .content-text {
+        font-size: 1.8rem;
+        line-height: 2.8rem;
+    }
+    .content-container-inner {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+    .image-with-text.check-list {
+        margin-bottom: 3.8rem;
+        margin-top: 3.4rem;
+    }
+    .content-heading.heading-large {
+        font-size: 3rem;
+        line-height: 3.8rem;
+        margin-bottom: 16px;
+    }
+}
+
+{%- endstyle -%}
+<div id="{{section.settings.section_id}}" class="content-section {% if section.settings.background != blank %}section-bg{% endif %}">
+    <div class="page-width">
+        <div class="content-container-inner content-{{section.settings.content_alignment}}">
+            {% if section.settings.preHeading != blank %}<p class="content-pre-heading">{{section.settings.preHeading}}</p>{% endif %}
+            {% if section.settings.heading != blank %}<h2 class="content-heading heading-{{section.settings.heading_size}}">{{section.settings.heading}}</h2>{% endif %}
+            {% if section.settings.description != blank %}<p class="content-text">{{section.settings.description}}</p>{% endif %}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.static-content.name",
+  "tag": "section",
+  "class": "spaced-section spaced-section--full-width",
+  "settings": [
+    {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section Id"
+    }, 
+    {
+        "type": "text",
+        "id": "preHeading",
+        "label": "t:sections.static-content.settings.preHeading.label"
+    },
+    {
+        "type": "text",
+        "id": "heading",
+        "label": "t:sections.static-content.settings.heading.label"
+    },
+    {
+        "type": "select",
+        "id": "heading_size",
+        "options": [
+          {
+            "value": "medium",
+            "label": "t:sections.static-content.settings.heading_size.options__1.label"
+          },
+          {
+            "value": "large",
+            "label": "t:sections.static-content.settings.heading_size.options__2.label"
+          }
+        ],
+        "default": "medium",
+        "label": "t:sections.static-content.settings.heading_size.label"
+    },
+    {
+        "type": "text",
+        "id": "description",
+        "label": "t:sections.static-content.settings.description.label"
+    },
+    {
+        "type": "color",
+        "id": "background",
+        "label": "Background"
+    },
+    {
+        "type": "select",
+        "id": "content_alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "t:sections.static-content.settings.content_alignment.options__1.label"
+          },
+          {
+            "value": "center",
+            "label": "t:sections.static-content.settings.content_alignment.options__2.label"
+          },
+          {
+            "value": "right",
+            "label": "t:sections.static-content.settings.content_alignment.options__3.label"
+          }
+        ],
+        "default": "left",
+        "label": "t:sections.static-content.settings.content_alignment.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.static-content.presets.name"
+    }
+  ]
+}
+{% endschema %}

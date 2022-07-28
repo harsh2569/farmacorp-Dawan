@@ -1,0 +1,77 @@
+{{ 'icon-with-text.css' | asset_url | stylesheet_tag }}
+
+<div class="page-width icon-with-text">
+    <div class="grid grid--4-col-desktop icon-with-text__grid">
+    {% for block in section.blocks %}
+        <div class="grid grid__item icon-with-text__grid-item">
+            <div class="icon-with-text__icon">
+                {% if block.settings.icon != blank %}
+                    {{ block.settings.icon }}
+                {% endif %}
+            </div>
+            <div class="icon-with-text__text">
+                {% if block.settings.heading != blank %}
+                    <h2>{{ block.settings.heading }}</h2>
+                {% endif %}
+                {% if block.settings.description != blank %}
+                    <p>{{ block.settings.description }}</p>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Icon With Text",
+    "class": "spaced-section spaced-section--full-width",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "default": "Icon With Text",
+            "label": "Title"
+        }        
+    ],
+    "blocks":[
+        {
+            "type": "item",
+            "name": "Item",
+            "settings": [
+                {
+                    "type": "textarea",
+                    "id": "icon",
+                    "label": "Icon"
+                },
+                {
+                    "type": "text",
+                    "id": "heading",
+                    "label": "Heading"
+                },
+                {
+                    "type": "textarea",
+                    "id": "description",
+                    "label": "Description"
+                }
+            ]            
+        }
+    ],
+    "presets":[
+        {
+            "name": "Item",
+            "blocks":[
+                {
+                    "type": "item"
+                },
+                {
+                    "type": "item"
+                },
+                {
+                    "type": "item"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

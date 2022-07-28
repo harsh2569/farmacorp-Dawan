@@ -1,0 +1,77 @@
+.search__input.field__input {
+  padding-right: 5rem;
+}
+
+.search__button .icon {
+  height: 1.8rem;
+  width: 1.8rem;
+}
+
+/* Remove extra spacing for search inputs in Safari */
+input::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+#product-grid ul.product-grid {
+  margin-top: 4.1rem;
+}
+
+.template-search__search {
+  display: none;
+}
+
+.template-search__header h1 {
+  font-weight: 600;
+  font-size: 3.2rem;
+  line-height: 3.9rem;
+  letter-spacing: -0.2px;
+  display: flex;
+  align-items: center;
+}
+
+.template-search__header h1 span {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+  display: block;
+  margin-left: 1rem;
+}
+
+.search-grid-filter {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-sorting {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media screen and (min-width: 750px) {
+  #product-grid ul.product-grid {
+    margin-top: 3.4rem;
+  }
+
+  .search-grid-filter .facets-container {
+    width: 240px;
+  }
+  
+  .search-grid-filter #ProductGridContainer {
+    width: calc(100% - 240px);
+    padding-left: 5.6rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .template-search__header h1 {
+    display: block;
+  }
+
+  .template-search__header h1 span {
+    margin-top: 0.7rem;
+    margin-left: 0;
+  }
+}

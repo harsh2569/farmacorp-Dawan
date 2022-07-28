@@ -1,0 +1,117 @@
+<style>
+ #mypoints,
+  #mypoints:target ~ * {
+    display: none;
+  }
+
+  #mypoints:target {
+    display: block;
+  }
+
+#mypoints .total_points{
+	font-weight: 500;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-black);
+     margin-top: 0px;
+}
+div#mypoints table th {
+    border: none;
+    text-align: left;
+    padding-left: 0px;
+    font-weight: 600;
+}
+#mypoints table{
+  font-size:16px;
+}
+
+div#mypoints table td {
+    border: none;
+    border-bottom:1px solid #e5e5e5;
+}
+
+#mypoints  tr:first-of-type {
+    border-top: none;
+    border-bottom: none;
+}
+#mypoints tr:not(:first-of-type) td {
+    padding-left: 0;
+}
+#mypoints tr:not(:first-of-type) td:nth-child(3) {
+    padding-left: 21px;
+}
+#mypoints tr:not(:first-of-type) td:nth-child(4) {
+    padding-left: 30px;
+    text-align: left;
+}
+#mypoints h2.account__page-title {
+    margin-bottom: 32px;
+}
+
+@media only screen and (max-width:480px){
+	
+	div#mypoints table {
+    width: 460px;
+}
+#mypoints h2.account__page-title {
+    margin-bottom: 10px;
+    font-size: 20px;
+    line-height: 26px;
+}
+#mypoints .total_points {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+}
+#mypoints table th {
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 18px;
+}
+#mypoints tr:not(:first-of-type) td {
+    padding-left: 0;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+}
+  </style>
+
+
+
+<div id="mypoints">
+ <h2 class="account__page-title">Mis puntos</h2>
+<p class="total_points">Total puntos: 23450</p>
+<div style="overflow-x:auto;">
+<table>
+    
+	<tr>
+       <th>Fecha</th>
+       <th>Sucursal</th>
+       <th>Ganados</th>
+       <th>Cobrados</th>
+	</tr>
+	
+	<tr>
+       <td>10/03/22</td>
+       <td>SC 66 -URUBO</td>
+       <td>25</td>
+       <td>0</td>
+	</tr>
+	<tr>
+       <td>10/03/22</td>
+       <td>SC 66 -URUBO</td>
+       <td>25</td>
+       <td>0</td>
+	</tr>
+	<tr>
+	<td>10/03/22</td>
+	<td>SC 66 -URUBO</td>
+	<td>25</td>
+	<td>0</td>
+	</tr>
+</table>
+</div>
+
+</div>

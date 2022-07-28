@@ -1,0 +1,54 @@
+{% comment %}
+    Renders a set of links for paginated results. Must be used within paginate tags.
+
+    Usage:
+    {% paginate results by 2 %}
+      {% render 'pagination', paginate: paginate, anchor: '#yourID' %}
+    {% endpaginate %}
+
+    Accepts:
+    - paginate: {Object}
+    - anchor: {String} (optional) This can be added so that on page reload it takes you to wherever you've placed your anchor tag.
+{% endcomment %}
+
+<link rel="stylesheet" href="{{ 'component-pagination.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'component-pagination.css' | asset_url | stylesheet_tag }}</noscript>
+
+{%- if paginate.parts.size > 0 -%}
+  <div class="pagination-wrapper">
+    <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+      <ul class="pagination__list list-unstyled" role="list">
+        
+      <li {% unless paginate.previous %}disabled{% endunless %}>
+        <a href="{{ paginate.previous.url }}{{ anchor }}" class="pagination__item pagination__item--next pagination__item-arrow link motion-reduce" aria-label="{{ 'general.pagination.previous' | t }}">
+          <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.51519 0.23517C5.55012 0.270005 5.57782 0.311386 5.59673 0.356945C5.61563 0.402504 5.62536 0.451345 5.62536 0.50067C5.62536 0.549996 5.61563 0.598837 5.59673 0.644396C5.57782 0.689955 5.55012 0.731336 5.51519 0.76617L1.27994 5.00067L5.51519 9.23517C5.58561 9.30558 5.62517 9.40109 5.62517 9.50067C5.62517 9.60025 5.58561 9.69576 5.51519 9.76617C5.44478 9.83659 5.34928 9.87614 5.24969 9.87614C5.15011 9.87614 5.05461 9.83659 4.98419 9.76617L0.484194 5.26617C0.449271 5.23134 0.421564 5.18995 0.402659 5.14439C0.383754 5.09884 0.374023 5.05 0.374023 5.00067C0.374023 4.95134 0.383754 4.9025 0.402659 4.85695C0.421564 4.81139 0.449271 4.77 0.484194 4.73517L4.98419 0.23517C5.01903 0.200248 5.06041 0.172541 5.10597 0.153636C5.15153 0.134731 5.20037 0.125 5.24969 0.125C5.29902 0.125 5.34786 0.134731 5.39342 0.153636C5.43898 0.172541 5.48036 0.200248 5.51519 0.23517Z" fill="#1C1C1C"/>
+            </svg>            
+        </a>
+      </li>      
+
+      {%- for part in paginate.parts -%}
+        <li>
+          {%- if part.is_link -%}
+            <a href="{{ part.url }}{{ anchor }}" class="pagination__item link" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">{{ part.title }}</a>
+          {%- else -%}
+            {%- if part.title == paginate.current_page -%}
+              <span class="pagination__item pagination__item--current" aria-current="page" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">{{ part.title }}</span>
+            {%- else -%}
+              <span class="pagination__item">{{ part.title }}</span>
+            {%- endif -%}
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+
+      <li {% unless paginate.next %}disabled{% endunless %}>
+        <a href="{{ paginate.next.url }}{{ anchor }}" class="pagination__item pagination__item--prev pagination__item-arrow link motion-reduce" aria-label="{{ 'general.pagination.next' | t }}" >
+          <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.484194 0.23517C0.519028 0.200248 0.56041 0.172541 0.605968 0.153636C0.651527 0.134731 0.700368 0.125 0.749694 0.125C0.799019 0.125 0.84786 0.134731 0.893419 0.153636C0.938978 0.172541 0.980359 0.200248 1.01519 0.23517L5.51519 4.73517C5.55012 4.77 5.57782 4.81139 5.59673 4.85695C5.61563 4.9025 5.62536 4.95134 5.62536 5.00067C5.62536 5.05 5.61563 5.09884 5.59673 5.14439C5.57782 5.18995 5.55012 5.23134 5.51519 5.26617L1.01519 9.76617C0.944779 9.83659 0.849275 9.87614 0.749694 9.87614C0.650112 9.87614 0.554609 9.83659 0.484194 9.76617C0.413779 9.69576 0.37422 9.60025 0.37422 9.50067C0.37422 9.40109 0.413779 9.30558 0.484194 9.23517L4.71944 5.00067L0.484194 0.76617C0.449271 0.731336 0.421564 0.689955 0.402659 0.644396C0.383754 0.598837 0.374023 0.549996 0.374023 0.50067C0.374023 0.451345 0.383754 0.402504 0.402659 0.356945C0.421564 0.311386 0.449271 0.270005 0.484194 0.23517Z" fill="#1C1C1C"/>
+            </svg>            
+        </a>
+      </li>
+      </ul>
+    </nav>
+  </div>
+{%- endif -%}

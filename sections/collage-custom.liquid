@@ -1,0 +1,147 @@
+<!-- /sections/collage-custom -->
+{{ 'section-collage-custom.css' | asset_url | stylesheet_tag }}
+
+<div id="collage-{{section.id }}" class="page-width">
+  <div class="collage--items">
+    {% for block in section.blocks %}
+      <div class="collage-item">    
+        <a href="{{ block.settings.link}}">    
+          <div class="collage-item-content">
+            <span class="collage-item-pretext">{{- block.settings.pretext -}}</span>
+            <div class="collage-item-title">{{- block.settings.title -}}</div>
+            <span class="button button--primary">{{- block.settings.cta_text -}}</span>
+          </div>
+          <div class="collage-item-image {{ block.settings.vertical_alignment }}-align" style="bottom: {{ block.settings.bottom_offset }}%;">
+            <img
+              srcset="{%- if block.settings.image.width >= 150 -%}{{ block.settings.image | img_url: '150x' }} 150w,{%- endif -%}
+                {%- if block.settings.image.width >= 250 -%}{{ block.settings.image | img_url: '250x' }} 250w,{%- endif -%}
+                {%- if block.settings.image.width >= 350 -%}{{ block.settings.image | img_url: '350x' }} 350w,{%- endif -%}
+                {{ block.settings.image | img_url: 'master' }} {{ block.settings.image.width }}w"
+              src="{{ block.settings.image | img_url: '150x' }}"
+              sizes="auto"
+              alt="{{ block.settings.image.alt | escape }}"
+              loading="lazy"
+              width="{{ block.settings.image.width }}"
+              height="{{ block.settings.image.height }}"
+            >
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Promo Collage",
+  "tag": "section",
+  "class": "spaced-section collage-custom-section",
+  "settings": [
+
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [   
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        { 
+          "type": "select",
+          "id": "vertical_alignment",
+          "label": "Image Vertical Alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 0,
+          "unit": "%",
+          "id": "bottom_offset",
+          "label": "Image Bottom Offset"
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "pretext",
+          "label": "Pretext"
+        },
+        {
+          "type": "textarea",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "CTA Text"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link To"
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "background",
+          "label": "Background Color"
+        },
+        {
+          "type": "color",
+          "id": "pretext_color",
+          "label": "Pretext Color"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Title Color"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promo Collage",
+      "blocks": [
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

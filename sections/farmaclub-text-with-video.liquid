@@ -1,0 +1,207 @@
+<!--  
+  sections/farmaclub-text-with-video.liquid
+-->
+
+<style>  
+
+  @media screen and (min-width: 750px){
+    .farmaclub__grid {
+      border-bottom: 1px solid;
+      border-color: #DFE4EA;
+      margin-bottom: 4.8rem;
+      padding-bottom: 5.4rem;
+    }
+  }
+
+  .farmaclub__heading {
+    font-size: 5.6rem;
+    line-height: 6.2rem;
+    font-weight: 600;
+    letter-spacing: -2.4px;
+    margin-bottom: 1.6rem;
+  }
+
+  .farmaclub__subtext {
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 2.6rem;
+    letter-spacing: -0.3px;
+    margin: 0;
+    margin-bottom: 3.6rem;
+    color: #000000;
+  }
+
+  .farmaclub__button {
+     padding: 12px 21.36px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    font-family: 'Inter';
+    
+    border-radius: 8px;
+  }
+
+
+  .farmaclub__blocks-heading {
+    font-weight: 600;
+    font-size: 2.2rem;
+    line-height: 3rem;
+    letter-spacing: -0.55px;
+    margin-bottom: 1.4rem;
+  }
+
+  .farmaclub__blocks-subtext {
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 2.6rem;
+    letter-spacing: -0.3px;
+    color: #3E4462;
+    margin: 0;
+  }
+
+  .farmaclub--steps:last-child .farmaclub-steps__subtext {
+    margin-bottom: 0;
+  }
+
+  .farmaclub__bottom-grid {
+    margin-left: -3rem;
+  }
+
+  .farmaclub__bottom-grid .grid__item {
+    padding-left: 3rem;
+  }
+
+  @media screen and (max-width: 989px) {
+    .farmaclub__grid {
+      margin-bottom: 4.9rem;
+    }
+
+    .farmaclub__text {
+      text-align: center;
+      margin-bottom: 3.1rem;
+    }
+
+    .farmaclub__heading {
+      font-size: 2.4rem;
+      line-height: 3.2rem;
+      letter-spacing: -0.2px;
+    }
+
+    .farmaclub__button {
+      font-size: 1.4rem;
+      line-height: 2rem;
+      padding: 1rem 1.6rem;
+    }
+
+    .farmaclub__blocks-heading {
+      font-size: 2rem;
+      line-height: 2.6rem;
+      letter-spacing: -0.2px;
+      margin-bottom: 1.8rem;
+    }
+
+    .farmaclub__blocks-subtext {
+      font-size: 1.6rem;
+      line-height: 2.4rem;
+      letter-spacing: -0.2px;
+    }
+
+    .farmaclub__bottom-grid .grid__item:not(:last-child) {
+      padding-bottom: 4.1rem;
+    }
+  }
+
+  @media screen and (max-width:767px) {
+   
+   .farmaclub__button { 
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      min-height: auto;
+  }
+
+  }
+</style>
+
+<div class="farmaclub__text-with-video">
+  <div class="page-width">
+    <div class="grid grid--1-col grid--2-col-tablet farmaclub__grid">
+      <div class="grid__item farmaclub__text">
+        {% if section.settings.heading != blank %}
+          <h2 class="farmaclub__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+        {% if section.settings.subtext != blank %}
+          <p class="farmaclub__subtext">{{ section.settings.subtext }}</p>
+        {% endif %}
+        {% if section.settings.button_text != blank %}
+          <a class="button button--farmaclub farmaclub__button" href="{{ section.settings.button_link }}">{{ section.settings.button_text }}</a>
+        {% endif %}
+      </div>
+      <div class="grid__item farmaclub__video">
+        <div class="media" style="padding-bottom: 56.25%;">
+          <iframe src="https://www.youtube.com/embed/8GglQL7y2kU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>        
+      </div>
+    </div>
+    <div class="grid grid--1-col grid--3-col-tablet farmaclub__bottom-grid">
+      {% for block in section.blocks %}
+        <div class="grid__item farmaclub__text-blocks">
+          {% if block.settings.heading != blank %}
+            <h4 class="farmaclub__blocks-heading">{{ block.settings.heading }}</h4>
+          {% endif %}
+          {% if block.settings.subtext != blank %}
+            <p class="farmaclub__blocks-subtext">{{ block.settings.subtext }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Text with video",
+  "class": "spaced-section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text_block",
+      "name": "Text Block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "subtext",
+          "label": "Subtext"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,108 @@
+<style>
+    .services{
+        max-width: 1110px;
+    }
+
+    .services__heading{
+        text-align: center;
+        font-size: 3.6rem;
+        line-height: 4.4rem;
+        font-weight: 600;
+        letter-spacing: -0.15rem;
+    }
+
+    .services__text{
+        font-weight: 600;
+        font-size: 2.2rem;
+        line-height: 3rem;
+        letter-spacing: -0.55px;
+        color: #18214D;
+        margin-top: 6.5rem;
+        margin-bottom: 2.2rem;
+    }
+
+    .services__subtext{
+        border: 1px solid transparent;
+        background: #EFF2F6;
+        border-radius: 0.8rem;
+    }
+
+    .services__subtext:nth-child(2n){
+        background: #FFFFFF;
+    }
+
+    .services__subtext p{
+        display: flex;
+        justify-content: space-between;
+        margin: 2.1rem 7.4rem 2.1rem 3.2rem;
+        font-size: 1.8rem;
+        line-height: 2.6rem;
+        letter-spacing: -0.3px;
+        color: #000000;
+    }
+</style>
+<div class="page-width services">
+    {% if section.settings.heading != blank %}
+        <h3 class="services__heading"> {{ section.settings.heading }} </h3>
+    {% endif %}
+    {% if section.settings.text != blank %}
+        <h4 class="services__text"> {{ section.settings.text }} </h4>
+    {% endif %}
+    <div class="services__list">
+        {% for block in section.blocks %}
+            {% if block.settings.service != blank %}
+                <div class="services__subtext"> 
+                    <p>{{ block.settings.service}}{% render 'icon-tick-new'%} </p>
+                </div>
+            {% endif %}
+        {% endfor %} 
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Services",
+    "class": "spaced-section",
+    "settings": [
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+        },
+        {
+            "type": "text",
+            "id": "text",
+            "label": "Text"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "text",
+            "name": "Services",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "service",
+                    "label": "Service" 
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Services",
+            "blocks": [
+                {
+                    "type": "text"
+                },
+                {
+                    "type": "text"
+                },
+                {
+                    "type": "text"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

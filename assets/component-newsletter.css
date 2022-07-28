@@ -1,0 +1,133 @@
+.newsletter__wrapper {
+  border-radius: 16px;
+}
+
+/* newletter-form-wrap */
+
+.newsletter__wrapper.color-background-2.gradient {
+  background-color: #F9FAFB;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+@media screen and (min-width: 750px) {
+  .newsletter-form-wrap {
+    width: 50%;
+    max-width: 45rem;
+    margin-left: 2rem;
+  }
+
+  .newsletter-form {
+    align-items: flex-start;
+    margin: 0 auto;
+  }
+}
+
+.newletter-header {
+  text-align: left;
+}
+
+.newletter-header h2 {
+  font-weight: 600;
+  font-size: 3rem;
+  line-height: 3.8rem;
+  color: var(--color-gray);
+  margin-bottom: 1.6rem;
+  letter-spacing: 0px;
+}
+
+.newletter-header .rte {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  color: var(--color-lightGray);
+}
+
+.newsletter-form__field-wrapper {
+  width: 100%;
+}
+
+.newsletter-form__field-wrapper .field__input {
+  padding-right: 5rem;
+  height: 4.8rem;
+  color: var(--color-lightGray);
+}
+
+.newsletter-form__message {
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+.newsletter-form__message--success {
+  margin-top: 2rem;
+}
+
+.newsletter-form__button {
+  margin: 0;
+  width: 100%;
+  padding: 1.2rem 2rem;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  letter-spacing: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .newsletter-form__message {
+    justify-content: flex-start;
+  }
+
+  .newsletter-form__field-wrapper .field__input {
+    margin-right: 16px;
+    width: calc(100% - 146px);
+  }
+
+  .newsletter-form__button {
+    width: 13rem;
+    padding: 1.2rem 2rem;
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    letter-spacing: 0;
+  }
+}
+
+.newsletter-form__button .icon {
+  width: 1.5rem;
+}
+
+@media screen and (max-width: 749px) {
+  .newsletter__wrapper .newsletter-form__field-wrapper .field {
+    display: block;
+  }
+
+  .newsletter__wrapper {
+    padding-right: 2.4rem;
+    padding-left: 2.4rem;
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+
+  .newsletter-form-wrap {
+    margin-top: 3.2rem;
+  }
+
+  .newletter-header .rte {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .newsletter-form__button {
+    margin-top: 1.6rem;
+  }
+  .facet-filters__sort+.icon-caret {
+    right: 12.5px;
+    top: 18px;
+  }
+  
+}

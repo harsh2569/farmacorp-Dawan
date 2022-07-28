@@ -1,0 +1,785 @@
+
+{% comment %}
+  @param quick_links {LinkedList}
+    Handle of menu to display
+
+  @param enable_live_search {Bool}
+    Determine whether search will be a auto prompt results
+
+  @param enable_images {Bool}
+    Display images in flydown
+
+  @param enable_content {Bool}
+    Display Articles and Pages results
+
+  @param placeholder {String|Nil}
+    Add a custom placeholder string
+{% endcomment %}
+
+{{ 'live-search-form.css' | asset_url | stylesheet_tag }}
+
+{% assign citys = settings.citys | split: ',' %} 
+{% assign has_quick_links = false %}
+{% if quick_links.links.size > 0 %}
+  {% assign has_quick_links = true %}
+{% endif %}
+
+{%- capture search_type -%}
+  {% if enable_content %}
+    article,page,product
+  {% else %}
+    product
+  {% endif %}
+{%- endcapture -%}
+
+{%- assign placeholder_text = blank -%}
+{%- if placeholder != blank -%}
+  {%- assign placeholder_text = placeholder -%}
+{% else %}
+  {%- assign placeholder_text = 'search.form.placeholder' | t -%}
+{%- endif -%}
+
+<div class="live-search lievtest" data-live-search>
+  {%- assign filter = blank -%}
+  {%- unless section.settings.filter_search_by == 'disabled' -%}
+    {%- assign filter_search_by = section.settings.filter_search_by -%}
+
+    {%- if search.performed -%}
+      {%- assign field_prefix = filter_search_by | append: ':' -%}
+      {%- if search.terms contains field_prefix -%}
+        {%- assign filter = search.terms | split: field_prefix | last -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endunless -%}
+
+  <form
+    class="
+      live-search-form
+      form-fields-inline
+      {% unless filter == blank %}live-search-filter-active{% endunless %}
+    "
+    action="{{ routes.search_url }}"
+    method="get"
+    role="search"
+    aria-label="Product"
+    data-live-search-form
+  >
+    <input type="hidden" name="type" value="{{ search_type | replace: '  ', '' | strip_newlines }}">
+    
+    <div class="form-field no-label live-search-form-wrapper">
+      <div class="live-search-select live-search-location form-field visible">
+        <div class="form-field-select-wrapper">
+          <label id="lblCiuada" class="form-field-title" for="keyCiudad">
+            <!-- <i class="fa fa-refresh fa-spin"></i>Cargando...-->
+            {{ 'search.general.location' | t }}
+          </label>
+          {% include 'icon-location' %}
+          <select
+            class="form-field-input form-field-select form-field-filled"
+            id="keyCiudad"
+            onchange="changeCity()"
+            aria-label="Ciudad">
+            <option value=""> &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</option>
+          </select>       
+          </div>
+      </div>
+      <div class="live-search-form-inner-wrapper">
+        {%- unless section.settings.filter_search_by == 'disabled' -%}
+          {%- assign search_filter_content_first = blank -%}
+          {%- assign search_filter_selected = blank -%}
+
+          {%- case filter_search_by -%}
+            {%- when 'product_type' -%}
+              {% capture search_filter_content_rest %}
+                {% for type in shop.types %}
+                  {%- if type == blank -%}{%- continue -%}{%- endif -%}
+                  {%- if type == filter -%}
+                    {%- assign search_filter_selected = type -%}
+                    {%- capture search_filter_content_first -%}
+                      <option value="{{ filter_search_by }}:{{ type | escape }}" selected>{{ type }}</option>
+                    {%- endcapture -%}
+                  {%- else -%}
+                    <option value="{{ filter_search_by }}:{{ type | escape }}">{{ type }}</option>
+                  {%- endif -%}
+                {% endfor %}
+              {% endcapture %}
+        
+        
+          {% comment %}
+            {%- when 'tag' -%}
+                {%- capture search_filter_content_rest -%}
+                  {%- for tag in collections.all.all_tags -%}
+                    {%- assign split_tag = tag | split: '_' -%}
+                    {%- if split_tag[0] == 'searchfilter' -%}
+                      {%- if tag == filter or collection.title == split_tag[1] -%}
+                        {%- assign search_filter_selected = split_tag[1] -%}
+                        {%- capture search_filter_content_first -%}
+                          <option value="{{ filter_search_by }}:{{ tag | escape }}" selected>{{ split_tag[1] }}</option>
+                        {%- endcapture -%}
+                      {%- else -%}
+                        <option value="{{ filter_search_by }}:{{ tag | escape }}">{{ split_tag[1] }}</option>
+                      {%- endif -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- endcapture -%}
+            {%- endcase -%}
+      {% endcomment %}
+        
+            {%- when 'tag' -%}
+              {%- capture search_filter_content_rest -%}
+                {%- for tag in collections.all.all_tags -%}
+                {% comment %}
+                      {%- if tag == 'BOLSAS' -%}
+                  {%- assign search_filter_selected = tag -%}
+                          <option value="{{ filter_search_by }}:{{ tag | escape }}" selected>{{ tag }}</option>
+                      {%- else -%}
+                        <option value="{{ filter_search_by }}:{{ tag | escape }}">{{ tag }}</option>
+                      {%- endif -%}
+                {% endcomment %}
+                      <option value="{{ filter_search_by }}:{{ tag | escape }}">{{ tag }}</option>
+                    
+                {%- endfor -%}
+              {%- endcapture -%}
+          {%- endcase -%}
+
+          <span class="form-field-select-wrapper live-search-filter-wrapper">
+            <select onchange="liveSearchFilter();"  class="live-search-filter" data-live-search-filter data-filter-all="{{ 'search.form.filter_all' | t }}">
+              {{ search_filter_content_first }}
+              <option value="" {% if search_filter_selected == blank %}selected{% endif %}>{{ 'search.form.filter_all' | t }}</option>
+              {{ search_filter_content_rest }}
+            </select>
+            <label class="live-search-filter-label form-field-select" data-live-search-filter-label>
+              {%- if search_filter_selected != blank -%}
+                {{ search_filter_selected }}
+              {%- else -%}
+                {{ 'search.form.filter_all' | t }}
+              {%- endif -%}
+            </label>
+            {% include 'icon-chevron-down-small' %}
+          </span>
+        {%- endunless -%}
+        <div class="live-search-form-field-wrapper">
+          {%- include 'icon-search' -%}
+          <input
+            class="form-field-input live-search-form-field"
+            type="text"
+            name="q"
+            aria-label="{{ 'search.form.label' | t }}"
+            placeholder="{{ placeholder_text | escape }}"
+            {% if search.performed %}
+              {%
+                include 'search-sanitizer',
+                search_terms: search.terms
+              %}
+              value="{{ sanitized_terms }}"
+            {% endif %}
+            autocomplete="off"
+            data-live-search-input>
+          <button style="display: none;"
+            class="live-search-takeover-cancel"
+            type="button"
+            data-live-search-takeover-cancel>
+            {{ 'search.form.cancel' | t }}            
+          </button>  
+        </div>       
+
+        <button
+          class="live-search-button button-primary"
+          type="submit"
+          data-live-search-submit
+        >
+          <span class="search-icon search-icon--inactive">
+            {{ 'search.form.label' | t }}
+            {% include 'icon-search-2' %}
+          </span>
+          <span class="search-icon search-icon--active" style="display: none;">
+            {% include 'icon-spinner' %}
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <div class="search__results restest1" id="searchResults">
+      <!-- <div class="search__results-inner">
+        {% for i in (1..10) %}
+        <a href="/search?q=gnc">
+          Search term <strong>highlighted</strong>
+        </a>
+        {% endfor %}
+      </div> -->
+    </div>
+
+  <!-- <form class="d-flex" action="/search">
+    <input id="searchInput" class="form-control me-2 border-0 search-box" type="text" name="q" placeholder="Search" autocomplete="off">
+</form> -->
+    <!-- <div class="result_box">
+      <ul class="list-group" id="searchResults">
+      </ul>
+    </div> -->
+
+
+    <div class="search-flydown" data-live-search-flydown style="display: none;">
+      <div class="search-flydown--placeholder" data-live-search-placeholder>
+        <div class="search-flydown--product-items">
+          {% for i in (1..3) %}
+            <a class="search-flydown--product search-flydown--product" href="#">
+              {% if enable_images %}
+                <div class="search-flydown--product-image">
+                  {{ 'image' | placeholder_svg_tag: 'placeholder--image placeholder--content-image' }}
+                </div>
+              {% endif %}
+
+              <div class="search-flydown--product-text">
+                <span class="search-flydown--product-title placeholder--content-text"></span>
+                <span class="search-flydown--product-price placeholder--content-text"></span>
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="search-flydown--results {% if enable_content %}search-flydown--results--content-enabled{% endif %}" data-live-search-results></div>
+
+   
+
+      {% if has_quick_links %}
+        <div class="search-flydown--quicklinks" data-live-search-quick-links>
+          <span class="search-flydown--quicklinks-title">{{ quick_links.title }}</span>
+
+          <ul class="search-flydown--quicklinks-list">
+            {% for link in quick_links.links %}
+              <li class="search-flydown--quicklinks-item">
+                <a class="search-flydown--quicklinks-link" href="{{ link.url }}">
+                  {{ link.title }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    </div>
+    
+  </form>
+</div>
+
+<div id="availabityLocations" class="modalCustom">
+  <div class="modalCustom-content">
+    <div class="modalCustom-body">
+      <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Cras justo odio
+          <span class="badge badge-primary badge-pill">14</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Dapibus ac facilisis in
+          <span class="badge badge-primary badge-pill">2</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Morbi leo risus
+          <span class="badge badge-primary badge-pill">1</span>
+        </li>
+      </ul>
+
+    </div>
+    <div class="modalCustom-footer">
+      <button type="button" class="btn btn-link" onclick="document.getElementById('availabityLocations').style.display = 'none';">Ok</button>
+    </div>
+  </div>
+</div>
+
+<div class="select-city__modal">
+  <span class="select-city__modal-overlay"></span>
+  <div class="select-city__modal-inner">
+    <h4>{{ 'farmacorp.select_city_modal.heading' | t }}</h4>
+    <p>{{ 'farmacorp.select_city_modal.delivery_message' | t }}</p>
+    {% unless customer %}
+      <a href="" class="button button--primary">{{ 'farmacorp.select_city_modal.login_button' | t }}</a>
+    {% endunless %}
+    <div class="select__wrapper">
+      <div class="selected">
+        <span class="text">{{ 'farmacorp.select_city_modal.select_label' | t }}</span>
+        <span class="icon">{% render 'icon-chevron-down' %}</span>
+      </div>
+      <div class="select__wrapper-options">
+        <div class="select__wrapper-options-inner">
+          {% for i in (1..10) %}
+          <a href="/">Option {{ forloop.index }} <span>{% render 'icon-checkmark' %}</span></a>
+          {% endfor %}
+        </div>        
+      </div>
+    </div>
+    {% if customer and customer.addresses.size > 0 %}
+    <div class="address__options">
+      {% for address in customer.addresses %}
+      <div>
+        <p>
+          {{ address.first_name }} {{ address.last_name }}{% if address == customer.default_address %}<span>Pretederminada</span>{% endif %}
+        </p>
+        <p>{% if address.street != blank %}
+          {{ address.street }}
+          {% endif %}
+          {% if address.city != blank %}
+          {{ address.city }}
+          {% endif %}</p>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <div class="select-city__actions">
+      {% if customer and customer.addresses.size > 0 %}
+      <div class="links">
+        <a href="">{{ 'farmacorp.select_city_modal.view_more' | t }}</a>
+        <a href="">{{ 'farmacorp.select_city_modal.modify_shipping_address' | t }}</a>
+      </div>
+      {% endif %}
+      <button class="button button--primary">{{ 'farmacorp.select_city_modal.submit_button' | t }}</button>
+    </div>
+  </div>
+</div>
+
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<style>
+.buttonload {
+  background-color: #DADBDB; /* Green background */
+  border: none; /* Remove borders */
+  color: white; /* White text */
+  font-size: 16px /* Set a font size */
+}
+/* MODAL DESCRIPTION */
+
+/* The Modal (background) */
+.modalCustom {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 9999; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+[class*="modalCustom-content"] {
+  width: 300px;
+}
+
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .modalCustom-content { width: 500px;}
+}
+.modalCustom-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 500px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    color: black;
+   /* border-radius: 10px;*/
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.closeCustom {
+    color: black;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.closeCustom:hover,
+.closeCustom:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modalCustom-header {
+  
+    border-top-left-radius: 10p;
+    border-top-right-radius: 10px;
+    padding: 2px 16px;
+    background-color: #ebebeb;
+    color: black;
+}
+
+.modalCustom-body {
+  	padding: 20px 20px;
+	color: white;
+  	background-color : #2569B0;
+}
+
+.modalCustom-footer {
+    padding: 2px 16px;
+    background-color: white;
+    color: black;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    text-align: right;
+}
+.image-parent img.img-fluid {
+    max-width: 100%;
+}
+.image-parent.mr-3 {
+    width: 85px;
+    max-width: 85px;
+    float: left;
+    margin-right: 15px;
+}
+.search__results li {
+    list-style: none;
+    padding:6px;
+    float: left;
+    width: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+		-moz-box-align: center;
+		-ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.search__results li:first-child {
+    padding-top: 0px;
+}
+
+.search__results li:last-child {
+    padding-bottom: 0px;
+}
+
+.search__results {
+    z-index: 999;
+    max-height: 399px;
+    overflow: auto;
+    padding: 15px 0px;
+}
+.pro-content {
+    float: left;
+}
+.pro-content p.mb-0 {
+    margin: 0px;
+    font-size: 15px;
+    line-height: 18px;
+    letter-spacing: -.3px;
+}
+.pro-content small p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.pro-content  small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.pro-content p.ms-auto {
+    margin-top: 0px;
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: -.3px;
+    font-weight:500;
+}
+
+
+@media only screen and ( max-width:767px) {
+  .pro-content {
+    float: left;
+    width: 65%;
+}
+}
+</style>
+<!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script> -->
+<script type="text/javascript" src="{{ 'FarmacorpService.js' | asset_url }}">
+</script>
+<script>
+  
+  if (window.jQuery) {
+        jquery = window.jQuery;
+  } else if (window.Checkout && window.Checkout.$) {
+        jquery = window.Checkout.$;
+  }
+
+  $(function(){
+    // Show search results dummy dropdown
+    $('[data-live-search-input]').on('input keypress keyup focus', function(){
+      setTimeout(function() {
+        var search_val = $('.live-search-form-field').val();
+      console.log(search_val);
+       if(search_val == ''){
+           $('.search__results').removeClass('show');
+          $('.live-search-form-inner-wrapper').removeClass('search__results-visible');
+       }
+       else{
+        $('.search__results').addClass('show');
+      $('.live-search-form-inner-wrapper').addClass('search__results-visible');
+       }
+
+      }, 400);
+     
+      $('.search__results').addClass('show');
+      $('.live-search-form-inner-wrapper').addClass('search__results-visible');
+    });
+    // .on('blur', function(){
+    //   $('.search__results').removeClass('show');
+    //   $('.live-search-form-inner-wrapper').removeClass('search__results-visible');
+    // });
+
+$(window).click(function() {
+//Hide the menus if visible
+$('.search__results').removeClass('show');
+  $('.live-search-form-inner-wrapper').removeClass('search__results-visible');
+});
+
+    // Open Select city modal    
+    $('.live-search-location').on('click', function(e){
+      e.preventDefault();
+      $('.select-city__modal').addClass('active');
+    });
+
+    $('.select-city__modal-overlay, .select-city__actions .button').on('click', function(){
+      $('.select-city__modal').removeClass('active');
+    })
+
+    let city_selected = $('.select-city__modal .select__wrapper .selected');
+    city_selected.on('click', function(){
+      $(this).toggleClass('active');
+      // $(this).siblings('.select__wrapper-options').slideToggle();
+    });
+
+    $('.select__wrapper-options-inner a').on('click', function(e){
+      e.preventDefault();
+      city_selected.find('.text').text(($(this).text().trim()));
+      $('.select-city__modal .select__wrapper .selected').toggleClass('active');
+    });
+  });
+  
+  
+  
+
+  jquery(document).ready(function(){ 
+    
+      
+    if (window.location.href != `{{shop.url}}/`){
+
+        if(localStorage['liveSearchFilter']){
+
+          jquery('.live-search-filter-label').text(localStorage['liveSearchFilter']);
+          jquery('.live-search-filter  option').each(function() {                       
+            if(jquery(this).text() === localStorage['liveSearchFilter']){                
+              jquery(this).attr('selected', 'selected');
+            }
+          });  
+        }   
+    }else{
+      localStorage.removeItem('liveSearchFilter');
+    }
+
+
+    if(localStorage["city"]){
+      setCity();         
+    }
+     
+    forAmarket();
+    
+    if(!localStorage["city"]){      
+      getCity().then(function(data) {
+        localStorage["city"] = data.city;
+        setCity();       
+      }).catch(function(err) {
+         var citys =JSON.parse('{{citys | json}}');
+        console.log(err)
+        localStorage["city"] = citys[0];
+        setCity();    
+       // alert(err);
+      })
+    }  
+    
+    if(localStorage['create']){
+     
+        var act = JSON.parse(atob(JSON.parse(localStorage['create']).act));
+
+        getTokenUsuario(act.usuario, act.pass)
+        	.then(function(data) { 
+           		localStorage.removeItem('create');
+        }).catch(function(err) {
+             console.log(err);
+        });  
+
+    
+   	}
+    
+  });
+  
+   function forAmarket(){
+     
+      {% if shop.metafields.farmacorp.amarketCollections contains  collection.id  %}  
+        localStorage['liveSearchFilter'] = 'Amarket';
+      	jquery('.live-search-filter-label').text(localStorage['liveSearchFilter']);
+    	jquery('.live-search-filter  option').each(function() {                       
+      		if(jquery(this).text() === localStorage['liveSearchFilter']){ 
+        		jquery(this).attr('selected', 'selected');
+      		}
+    	});  
+        jquery(".live-search-filter" ).attr('disabled', 'disabled');
+      {% else %}
+        jquery(".live-search-filter" ).removeAttr('disabled');
+      {% endif %}
+     
+   }
+  
+  
+  
+  function liveSearchFilter(){
+    
+    localStorage['liveSearchFilter'] = jquery(".live-search-filter option:selected" ).text();
+    
+  }
+  
+  function setMyCity(cityUser){
+    localStorage.setItem("city", cityUser)
+  	document.getElementById("keyCiudad").innerHTML = `<option selected value="${cityUser}">${cityUser}</option>`;
+  }
+  
+  function setCity(){
+    
+    var has_items = false;
+    
+    {% if cart.items.size > 0 %}
+    has_items = true;
+	{% endif %}
+    
+    var cityUser = '{{ customer.default_address.city }}';
+    
+    if(cityUser){
+      if(cityUser.toLowerCase()!==localStorage["city"].toLowerCase()){   
+        if(has_items=== true || window.location.search === '?citydis=true'){  
+          
+           Swal.fire({
+              title: "{{ menu_item.title }}",
+              text: "{{ 'farmacorp.modal.detectoDireccionMsg1' |t}}, {{ 'farmacorp.modal.detectoDireccionMsg2' |t}}",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: "Ok",
+              cancelButtonText: "Cancelar",
+              reverseButtons: true,
+              showCancelButton: false, 
+          }).then((result) => {
+            if (result.isConfirmed) {
+                cambioCiudad();
+            }
+          });;
+          
+        }
+        setMyCity(cityUser);
+      }else{
+      	setMyCity(cityUser);
+      }
+    }else{
+      
+      var citys =JSON.parse('{{citys | json}}');
+      var ccitys = '';
+      ccitys = '<option value="'+localStorage["city"]+'">'+localStorage["city"]+'</option>' ;
+      citys.forEach(city =>{  
+        if(city.toLowerCase()!==localStorage["city"].toLowerCase()){
+          ccitys += '<option value="'+city+'">'+city+'</option>'
+        } 
+      });
+
+      document.getElementById("keyCiudad").innerHTML = ccitys;
+    }
+  }
+  
+  function getCity(){    
+     return new Promise(function(resolve, reject) {
+       jQuery.ajax({
+            url:`https://ipapi.co/json/`,
+            type:'get',
+            async:false,
+            success: function(data) {
+        		resolve(data) 
+      		},
+      		error: function(err) {
+        		reject(err)
+     		}
+    	});
+    });
+  }
+
+  function changeCity(){   
+
+     jQuery.getJSON('/cart.js', function (cart, textStatus) {
+      if(cart.item_count>0){
+          Swal.fire({
+              title: "{{ menu_item.title }}",
+              text: "{{ 'farmacorp.modal.cambioDireccionMsg1' |t}} {{ 'farmacorp.modal.cambioDireccionMsg2' |t}}",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: "Si, continuar",
+              cancelButtonText: "Cancelar",
+              reverseButtons: true
+          }).then((result) => {
+            if (result.isConfirmed) {
+                cambioCiudad();
+            }else
+            {
+            	 document.getElementById("keyCiudad").selectedIndex = 0;
+            }
+          });;
+      }else{
+        
+        cambioCiudad();
+      }
+    }); 
+  }
+  
+  function refresh() {
+    
+    //location.reload();   
+    if(typeof Availability === 'function') {    
+       Availability();
+    }
+    
+    if(typeof pintarSucusales === 'function') {    
+       pintarSucusales();
+    }    
+    
+    var carito = jquery('.site-header-cart--count');
+    carito.removeClass('visible');   
+    
+  }
+  
+  function cambioCiudad(){
+    jQuery.post('/cart/clear.js', function( data ) {
+ 	    var e = document.getElementById("keyCiudad");
+		var city =e.value;    
+    	localStorage.setItem("city", city); 
+		
+    	refresh();
+	});
+  }
+</script>

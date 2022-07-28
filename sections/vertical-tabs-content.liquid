@@ -1,0 +1,189 @@
+<style>
+    .vertical-tabs-wrap {
+        margin-top: 4.5rem;
+    }
+    .vertical-tabs-wrap {
+        padding-bottom: 5rem;
+    }
+    .vt-inner {
+        display: flex;
+    }
+    .vt-inner .vt-left {
+        width: 30%;
+        max-width: 31.2rem;
+        padding-right: 8rem;
+    }
+    .vt-inner .vt-left .vt-left-list {
+        background-color: var(--color-lightBackground);    
+        list-style: none;
+        min-width: 22.6rem;
+        padding: 1px 0;
+        border-radius: 0.8rem;
+        margin: 0;
+    }
+    .vt-inner .vt-left .vt-left-list li {
+        margin: 0.6rem;
+    }
+    .vt-inner .vt-left .vt-left-list li a {
+        color: var(--color-lightGray);
+        display: block;
+        padding: 1rem 1.4rem;
+        border-radius: 0.6rem;
+        font-size: 1.6rem;
+        line-height: 2.4rem;
+        font-weight: 500;
+    }
+    .vt-inner .vt-left .vt-left-list li a:hover,
+    .vt-inner .vt-left .vt-left-list li.active a {
+        background-color: var(--color-white);
+        color: var(--color-bluishGray);
+        box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
+    }
+    .vt-inner .vt-right, .vt-inner .vt-right * {
+        font-weight: 400;
+        font-size: 1.6rem;
+        line-height: 2.4rem;
+        letter-spacing: -0.2px;
+    }
+    .vt-inner .vt-right strong {
+        font-weight: 600;
+    }
+    .vt-inner .vt-right p {
+        margin-bottom: 2.5rem;
+        margin-top: 0;
+    }
+    .vt-inner .vt-right br {
+        height: 2.5rem;
+    }
+    .vt-content:not(:first-child) {
+        display: none;
+    }
+    .mobile-custom-dd {
+        display: none;
+    }
+    @media screen and (min-width: 990px) {
+        .vt-left-list {
+            display: block !important;
+        }
+    }
+    @media screen and (max-width: 989px) {
+        .vt-inner {
+            display: block;
+        }
+        .vt-inner .vt-left {
+            width: 100%;
+            max-width: initial;
+            padding-right: 0;
+            margin-bottom: 2.6rem;
+        }
+        .mobile-custom-dd {
+            display: block;
+            color: var(--color-lightGray);
+            padding: 1rem 4rem 1rem 1.4rem;
+            border-radius: 0.8rem;
+            font-size: 1.6rem;
+            line-height: 2.4rem;
+            font-weight: 500;
+            border: 1px solid #D0D5DD;
+            box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+            position: relative;
+            margin-bottom: 0.8rem;
+        }
+        .mobile-custom-dd svg {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 1rem;
+            right: 1.4rem;
+        }
+        .vt-left-list {
+            display: none;
+        }
+    }
+</style>
+
+<div class="vertical-tabs-wrap">
+    <div class="page-width">
+        <div class="vt-inner">
+            <div class="vt-left">
+                <a href="javascript:void(0)" class="mobile-custom-dd">
+                    <span>{{section.blocks[1].settings.tab}}</span>
+                    {% render 'icon-down-gray' %}
+                </a>
+                <ul class="vt-left-list">
+                    {% for block in section.blocks %}
+                        <li class="{% if forloop.index == 1%}active{% endif %}">
+                            <a class="tab-element" href="javascript:void(0)">{{block.settings.tab}}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="vt-right">
+                <div class="vt-content-wrap">
+                    {% for block in section.blocks %}
+                    <div class="vt-content">{{block.settings.content_page.content}}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $(document).on('click', '.tab-element', function() {
+            const $this = $(this);
+            $this.closest('li').addClass('active').siblings('li').removeClass('active');
+            const index = $this.closest('li').index();
+            $('.vt-content-wrap').find('.vt-content').eq(index).fadeIn(300).siblings('.vt-content').hide();
+            $('.mobile-custom-dd span').text($this.text());
+            if($(window).width() <= 989) {
+                $('.vt-left-list').slideUp(300);
+            }
+        });
+        $(document).on('click', '.mobile-custom-dd', function() {
+            $('.vt-left-list').slideToggle(300);;
+        });
+    });
+</script>
+    
+    {% schema %}
+    {
+        "name": "Tabs",
+        "class": "tabs-section",
+
+        "blocks": [
+            {
+                "type": "tabs",
+                "name": "Tabs",            
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "tab",
+                        "label": "Tab"                    
+                    },
+                    {
+                        "type": "page",
+                        "id": "content_page",
+                        "label": "Select content"                   
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "Tabs",
+                "blocks": [
+                    {
+                        "type": "tabs"
+                    },
+                    {
+                        "type": "tabs"
+                    },
+                    {
+                        "type": "tabs"
+                    }
+                ]
+            }
+        ]
+    }
+    {% endschema %}

@@ -1,0 +1,228 @@
+<style>
+    .page__heading .heading__text{
+        color: #1570EF;        
+    }    
+
+    .page__heading .heading__subtext{
+        color: #667085;        
+    }
+
+    .executive__list .grid__item{
+        padding-left: 3.2rem;
+        padding-bottom: 6.4rem;
+    }
+
+    .executive__heading h2{
+        font-size: 3.6rem;
+        text-transform: capitalize;
+        font-weight: 500;
+        line-height: 4.8rem;
+    }
+
+    .name__executive{
+        font-size: 2rem;
+        text-transform: capitalize;
+        color: #101828;
+        font-weight: 500;
+        line-height: 3rem;
+        margin-top: 2.4rem;        
+    }
+
+    .job-title__executive{
+        color: #1570EF;
+        font-size: 1.8rem;
+        line-height: 2.8rem;
+        margin-top: 0.4rem;        
+    }
+
+    .description__executive{
+        color: #667085;
+        font-size: 1.6rem;
+        line-height: 2.4rem;
+        margin-top: 1.6rem;        
+    }
+
+    .social__executive .list-social{
+        grid-gap: 2rem;
+        margin-top: 2.4rem;
+    }
+
+    @media screen and (max-width: 749px){
+        .page__heading{
+            padding: 0 1.6rem;
+        }
+
+        .page__heading .heading__text{
+            font-size: 1.4rem;
+            line-height: 2rem;
+        }
+
+        .page__heading .heading__h1{
+            font-size: 3.6rem;
+            line-height: 4.4rem;
+            margin-bottom: 1.6rem;
+        }
+
+        .page__heading .heading__subtext{
+            font-size: 1.8rem;
+            line-height: 2.8rem;
+        }
+
+        .executive{
+            padding: 0 1.6rem;
+        }
+
+        .executive__list .grid__item{
+            padding-left: 0;
+            padding-bottom: 4rem;
+        }
+
+        .name__executive{
+            font-size: 1.8rem;      
+            line-height: 2.8rem;   
+        } 
+        
+        .job-title__executive{            
+            font-size: 1.6rem;
+            line-height: 2.4rem;
+        }  
+        
+        .social__executive .list-social{
+            justify-content: flex-start;
+        }
+        
+    }
+
+</style>
+<div class="page-width executive">
+    <div class="executive__heading">
+        {% if section.settings.heading != blank %}
+            <h2> {{ section.settings.heading }} </h2>
+        {% endif %}
+    </div>
+    <div class="grid grid--1-col grid--3-col-tablet grid--4-col-desktop executive__list">
+        {% for block in section.blocks %}
+            <div class="grid__item ">
+                {% if block.settings.image != blank %}
+                    <div class="image__banner media executive__image" style="padding-bottom: {{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 }}%;">                
+                        <img
+                            srcset="{%- if block.settings.image.width >= 375 -%}{{ block.settings.image | img_url: '375x' }} 375w,{%- endif -%}
+                            {%- if block.settings.image.width >= 550 -%}{{ block.settings.image | img_url: '550x' }} 550w,{%- endif -%}
+                            {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | img_url: '750x' }} 750w,{%- endif -%}
+                            {%- if block.settings.image.width >= 1100 -%}{{ block.settings.image | img_url: '1100x' }} 1100w,{%- endif -%}
+                            {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | img_url: '1500x' }} 1500w,{%- endif -%}
+                            {%- if block.settings.image.width >= 1780 -%}{{ block.settings.image | img_url: '1780x' }} 1780w,{%- endif -%}
+                            {%- if block.settings.image.width >= 2000 -%}{{ block.settings.image | img_url: '2000x' }} 2000w,{%- endif -%}
+                            {%- if block.settings.image.width >= 3000 -%}{{ block.settings.image | img_url: '3000x' }} 3000w,{%- endif -%}
+                            {%- if block.settings.image.width >= 3840 -%}{{ block.settings.image | img_url: '3840x' }} 3840w,{%- endif -%}
+                            {{ block.settings.image | img_url: 'master' }} {{ block.settings.image.width }}w"
+                            sizes="auto"
+                            src="{{ block.settings.image | img_url: '1500x' }}"
+                            loading="lazy"
+                            alt="{{ block.settings.image.alt | escape }}"
+                            width="{{ block.settings.image.width }}"
+                            height="{{ block.settings.image.width | divided_by: block.settings.image.aspect_ratio }}"            
+                        >
+                    </div>
+                {% endif %} 
+                {% if block.settings.name != blank %}   
+                    <div class="name__executive">{{ block.settings.name }}</div>  
+                {% endif %}
+                {% if block.settings.job_title != blank %}   
+                    <div class="job-title__executive">{{ block.settings.job_title }}</div>  
+                {% endif %}  
+                {% if block.settings.description != blank %}   
+                    <div class="description__executive">{{ block.settings.description }}</div>  
+                {% endif %}
+                <div class="social__executive">
+                    <ul class="list-unstyled list-social" role="list">
+                      {%- if block.settings.social_1 != blank -%}
+                        <li class="social__1">
+                          <a href="{{ block.settings.social_1 }}" class="link" >
+                            {%- render 'icon-twitter-grey' -%}                            
+                          </a>
+                        </li>
+                      {%- endif -%}
+                      {%- if block.settings.social_2 != blank -%}
+                        <li class="social__2">
+                          <a href="{{ block.settings.social_2 }}" class="link" >
+                            {%- render 'icon-linkedin-grey' -%}                            
+                          </a>
+                        </li>
+                      {%- endif -%}
+                </div>
+            </div>  
+        {% endfor %}     
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Executives",
+    "class": "spaced-section",
+    "settings": [
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "executive",
+            "name": "Executive",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "image"
+                },
+                {
+                    "type": "text",
+                    "id": "name",
+                    "label": "Name"
+                },
+                {
+                    "type": "text",
+                    "id": "job_title",
+                    "label": "Job_title"
+                },
+                {
+                    "type": "text",
+                    "id": "description",
+                    "label": "Description"
+                },
+                {
+                    "type": "url",
+                    "id": "social_1",
+                    "label": "Social_1"
+                },
+                {
+                    "type": "url",
+                    "id": "social_2",
+                    "label": "Social_2"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Executive",
+            "blocks": [
+                {
+                    "type": "executive"
+                },
+                {
+                    "type": "executive"
+                },
+                {
+                    "type": "executive"
+                },
+                {
+                    "type": "executive"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,75 @@
+{% comment %}
+    Renders cart notification
+
+    Accepts:
+    - color_scheme: {String} sets the color scheme of the notification (optional)
+
+    Usage:
+    {% render 'cart-notification' %}
+{% endcomment %}
+
+<cart-notification>
+  <div id="cart-notification-wrapper" class="cart-notification-wrapper page-width{% if color_scheme %} color-{{ color_scheme }}{% endif %}">
+    <div id="cart-notification" class="cart-notification focus-inset" aria-modal="true" aria-label="{{ 'general.cart.item_added' | t }}" role="dialog" tabindex="-1">
+      <div class="cart-notification__header">
+        <h2 id="cart-notification-header" class="cart-notification__heading caption-large text-body">
+          {{ 'general.cart.heading' | t }}
+          <!-- <span class="{% if cart.item_count == 0 %}hidden{% endif %}">
+            &nbsp;({{ cart.item_count }})
+          </span> -->
+        
+          </h2>
+          <span class="cart_count">&nbsp;({{ cart.item_count }})</span> 
+        <button type="button" class="cart-notification__close modal__close-button link link--text focus-inset" aria-label="{{ 'accessibility.close' | t }}">
+          {% render 'icon-close-2' %}
+        </button>
+      </div>
+      <div id="cart-notification-product" class="cart-notification-product">{%- render 'cart-drawer-items' -%}</div>
+      <div class="cart-notification__empty">
+        <h5>Tu carrito esta vacío</h5>
+        <a href="/" id="cart-notification-button" class="button button--secondary button--full-width">Seguir comprando</a>
+      </div>
+      <div class="cart-notification__links">
+        <div id="cart-notification-subtotal" class="cart-notification__subtotal">
+          <span>Subtotal:</span>
+          <span>{{ cart.total_price | money }}</span>
+        </div>
+        <a href="{{ routes.cart_url }}" id="cart-notification-button" class="button button--secondary button--full-width">{{ 'general.cart.view_cart' | t }}</a>
+        <form action="{{ routes.cart_url }}" method="post" id="cart-notification-form">
+          <button class="button button--primary button--full-width" name="checkout">{{ 'sections.cart.checkout' | t }}</button>
+        </form>
+        <div class="cart-notification__shipping-text">Compra mínima para delivery valor de 30Bs</div>
+        <!-- <button type="button" class="link button-label">{{ 'general.continue_shopping' | t }}</button> -->
+      </div>
+      <div class="cart-notification__loader">
+        <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+          <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+        </svg>
+      </div>
+    </div>
+    <span class="cart-notification__close cart-notification__overlay"></span>
+  </div>
+</cart-notification>
+{% style %}
+  .cart-notification,   #cart-notification-header span {
+     display: none;
+  }
+
+{% endstyle %}
+
+<script>
+  $(document).on("click", ".cart-item__quantity-wrapper button, cart-drawer-remove-button, .product-form__submit" , function(){
+console.log('plus clicked');
+
+setTimeout(function() { 
+  jQuery.getJSON('/cart.js', function(cart) {
+   // now have access to Shopify cart object
+  //  alert('There are now ' + cart.item_count + ' items in the cart.');
+        $('.cart_count').html('&nbsp;('+cart.item_count+')');
+} );
+    }, 1200);
+   
+    
+});
+
+</script>

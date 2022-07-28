@@ -1,0 +1,261 @@
+<style>
+.faq__heading{
+    text-align: center;
+}
+
+.faq__h1{
+    font-size: 5.6rem;
+    line-height: 6.2rem;
+    letter-spacing: -2.4px;
+    margin-bottom: 0;
+}
+.faq__page.faq_style2 .faq__h1 {
+    font-size: 3.6rem;
+    line-height: 4.4rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    margin-top: 0;
+    color: var(--color-gray);
+    letter-spacing: -0.02em;
+}
+
+.faq__subtext {
+    font-size: 1.8rem;
+    line-height: 2.6rem;
+    letter-spacing: -0.3px;
+    color: var(--color-black-0);
+    margin-bottom: 4.8rem;
+}
+.faq__page.faq_style2 .faq__subtext {
+    font-size: 2rem;
+    line-height: 3rem;
+    font-weight: 400;
+    margin-bottom: 0;
+    margin-top: 0;
+    color: var(--color-lightGray);
+}
+.faq__page.faq_style2 .faq__heading {
+    max-width: 76.8rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+.faq__page.faq_style2 .faq {
+    margin-top: 6.4rem;
+    max-width: 76.8rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+.faq summary{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5rem;
+}
+
+.faq__details{
+    border-top: 1px solid;    
+    border-color: var(--color-lightBorder);
+}
+
+.faq__details:last-child{
+    border-bottom: 1px solid;    
+    border-color: var(--color-lightBorder);
+}
+
+.faq__question{
+    font-size: 2rem;
+    line-height: 2.8rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    color: var(--color-black-0);
+}
+
+.faq__answer{
+    padding: 0 5rem 3.5rem 2.4rem;
+}
+
+.faq__answer p {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    margin: 0 0 1rem 0;
+    letter-spacing: -0.2px;
+    color: var(--color-black-0);      
+}
+.faq__page.faq_style2 details summary {
+    padding: 2.5rem 0;
+    align-items: flex-start;
+}
+.faq__page.faq_style2 details[open] summary {
+    padding: 2.5rem 0 0.8rem;
+}
+.faq__page.faq_style2 details .faq__answer {
+    padding: 0 5rem 3.5rem 0;
+}
+.faq__page.faq_style2 .faq__question {
+    font-size: 1.8rem;
+    line-height: 2.8rem;
+    font-weight: 500;
+    color: var(--color-gray);
+}
+.faq__page.faq_style2 details .minus-icon {
+    display: none;
+}
+.faq__page.faq_style2 details[open] .plus-icon {
+    display: none;
+}
+.faq__page.faq_style2 details[open] .minus-icon {
+    display: block;
+}
+.faq__page.faq_style2 .faq__answer p {
+    color: var(--color-lightGray);
+} 
+
+.faq__answer p:last-child{
+    margin-bottom: 0;
+}
+.faq__page.faq_style2 .faq__details .plus-icon,
+.faq__page.faq_style2 .faq__details .minus-icon {
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    margin-top: 3px;
+}
+.faq__page.faq_style2 .faq__details .plus-icon svg,
+.faq__page.faq_style2 .faq__details .minus-icon svg {
+    width: 2rem;
+    height: 2rem;
+}
+.faq__page.faq_style2 {
+    padding-bottom: 7rem;
+}
+
+.faq__details img.minus {
+    display: none;
+}
+details[open] img.plus {
+    display: none;
+}
+details[open] img.minus {
+    display: block;
+}
+
+@media screen and (max-width: 767px) {
+    .faq__page.faq_style2 .faq__h1 {
+        font-size: 3rem;
+        line-height: 3.8rem;
+        margin-bottom: 1.6rem;
+    }
+    .faq__page.faq_style2 .faq {
+        margin-top: 4.4rem;
+    }
+    .faq__page.faq_style2 {
+        padding-bottom: 2.3rem;
+    }
+}
+
+</style>
+<div class="page-width faq__page {{section.settings.faq_style}}">
+    <div class="faq__heading">
+        {% if section.settings.heading != blank %}
+            <h1 class="faq__h1">{{ section.settings.heading }}</h1>
+        {% endif %}
+        {% if section.settings.subtext != blank %}
+            <p class="faq__subtext">{{ section.settings.subtext }}</p>
+        {% endif %}
+    </div>
+    <div class="faq">
+        {% for block in section.blocks %}
+            <div class="faq__details">
+                <details {% if section.settings.faq_style == 'faq_style2' %}open{% endif %}>
+                    <summary>
+                        {% if block.settings.question != blank %}
+                        <span class="faq__question">{{block.settings.question}}</span>
+                        {% if section.settings.faq_style == 'faq_style2' %}
+                        <span class="plus-icon">
+                           {% render 'accordion-plus' %}
+                        </span>
+                        <span class="minus-icon">{% render 'accordion-minus' %}</span>
+                        {% else %}
+                         <img class="plus" src="{{ 'Plus.png' | asset_img_url : 'master' }}">
+                        <img class="minus" src="{{ 'Remove.png' | asset_img_url : 'master' }}">
+                       
+                        {% endif %}
+                        {% endif %}
+                    </summary>
+                <div class="faq__answer">
+                    {% if block.settings.answer != blank %}{{ block.settings.answer }}{% endif %}
+                </div>
+                </details>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Frequent questions",
+    "class": "spaced-section",
+    "settings": [
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+        },
+        {
+            "type": "text",
+            "id": "subtext",
+            "label": "Subtext"
+        },
+        {
+            "type": "select",
+            "id": "faq_style",
+            "options": [
+              {
+                "value": "faq_style1",
+                "label": "Style1"
+              },
+              {
+                "value": "faq_style2",
+                "label": "Style2"
+              }
+            ],
+            "default": "faq_style1",
+            "label": "Style" 
+        }
+    ],
+    "blocks": [
+        {
+            "type": "faq",
+            "name": "Frequent questions",            
+            "settings": [
+                {
+                    "type": "textarea",
+                    "id": "question",
+                    "label": "Question"                    
+                },
+                {
+                    "type": "richtext",
+                    "id": "answer",
+                    "label": "Answer"                   
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Frequent question",
+            "blocks": [
+                {
+                    "type": "faq"
+                },
+                {
+                    "type": "faq"
+                },
+                {
+                    "type": "faq"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

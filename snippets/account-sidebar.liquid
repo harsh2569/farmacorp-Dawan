@@ -1,0 +1,43 @@
+<!-- snippets/account-sidebar.liquid -->
+<div class="account__sidebar" data-template="{{ template }}">      
+  <a href="/account" class="{% if template contains 'customers/account' %}active{% endif %}">
+    Mis pedidos
+  </a>
+  <a href="{{ routes.account_addresses_url }}" class="{% if template contains 'customers/addresses' %}active{% endif %}">
+    Mis direcciones
+  </a>
+  <a href="/account#profile">
+    Mi cuenta
+  </a>
+  <a href="/account#paymentMethods">
+    Métodos de pago
+  </a>
+  <a href="/account#changePassword">
+    Configuración
+  </a>  
+  <a href="/account#mypoints">
+    Mis puntos
+  </a>
+  <a href="{{ routes.account_logout_url }}">
+    {{ 'customer.log_out' | t }}
+  </a>
+</div>
+
+<script>
+  let locHash = location.hash;
+  let sidebarLinks = document.querySelectorAll('.account__sidebar a');
+
+  $('.account__sidebar a').on('click', function(){
+    $(this).siblings('a').removeClass('active');
+    $(this).addClass('active');
+  });
+
+  if(locHash != '') {
+    $('.account__sidebar a').each(function(){
+      if($(this).attr('href').indexOf(locHash) >= 0) {
+        $(this).siblings('a').removeClass('active');
+        $(this).addClass('active');
+      }
+    });
+  }
+</script>

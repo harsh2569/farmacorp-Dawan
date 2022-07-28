@@ -1,0 +1,717 @@
+
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<!-- JavaScript Bundle with Popper -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	
+	
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+
+<style>
+
+  @media screen and (min-width: 768px){
+
+    .page-tengo-seguro h5.letra a{
+      font-size: 20px;
+      padding-left: 33px;
+    }
+
+    .page-tengo-seguro .col h6.letra{
+      font-size: 16px;
+    }
+  
+    .page-tengo-seguro .accordion-body .letra{
+      font-size: 16px;
+    }
+
+    .page-tengo-seguro .accordion-header .accordion-button{
+      font-size: 27px;
+    }
+
+    .page-tengo-seguro .col li .letra{
+      font-size: 16px;
+    }
+  }
+  
+  @media screen and (min-width: 1024px){
+    .accordion-body .letra{
+      font-size: 16px;
+    }
+
+    .accordion-header .accordion-button{
+      font-size: 36px;
+    }
+  }
+
+    .page-tengo-seguro h5.letra a{
+      font-size: 16px;
+      padding-left: 33px;
+    }
+
+  .logo_with-test-cu{
+    justify-content: center;
+  }
+  
+  .bannerPrincipal{
+  	background: linear-gradient(90deg, #FFFFFF 0%, #CBECFC 100%);
+    width:100%;
+    padding: 50px;
+  }
+  .logoTengo{
+     max-width: 100%;
+     object-fit: cover;
+     padding: 40px;
+  }
+  .tituloPrincipal{
+    font-family: Panton;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 150%;
+    color: #004581;
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .detallePrincipal{
+    font-family: Panton;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 150%;
+    color: #004581;
+	mix-blend-mode: multiply;
+    
+  }
+  
+  .buttonNormal{
+  	font-family: Panton;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    align-items: center;
+    text-align: center;
+    background: #004581;
+    border-radius: 20px;
+    color: #FFFFFF;
+    padding: 10px;
+    width:220px;
+    border: 1px solid #004581;
+    margin:10px;
+  }
+  
+  .buttonOutline{
+    font-family: Panton;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    align-items: center;
+    text-align: center;
+    background: transparent;
+    border-radius: 20px;
+    color: #004581;
+    padding: 10px;
+    border: 1px solid #004581;
+  	width:220px;
+    margin:10px;
+  }
+  
+  .tituloSeccion1{
+    font-family: Panton;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 32px;
+    line-height: 43px;
+    text-align: center;
+    color: #004581;
+    padding: 50px;
+  }
+  
+  .iconosSeccion1{
+  	color: #004581;
+
+  }
+  
+  .detalleSeccion1{
+    font-family: Panton;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 150%;
+    color: #004581;
+	mix-blend-mode: multiply;
+    
+  }
+  
+  .section2{
+  	background: #D5F2FF;
+    width:100%;
+    padding: 50px;
+  }
+  
+  .section2Pasos{
+    font-family: Panton;
+    font-style: normal;
+    font-size: 16px;
+    align-items: center;
+    text-align: center;
+    width:90%;
+    height : 40px;
+    padding: 50px;
+    background:  #fff;
+    border-radius: 50px;
+    color: #004581;
+    padding: 10px;
+    border: 1px solid #fff;
+    margin: 10px 0px 10px 0px ;
+    display:table;
+  }
+  .section2PasosDescripcion{; 
+    display:table-cell;
+    vertical-align: middle;
+    font-family: Panton;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 20px;
+    padding-left:10px;
+    align-items: left;
+    text-align: left;
+    width:90%;
+  }
+  .section2PasosNumero{
+     background: #004581;
+    border-radius: 50px;
+    color: #fff;
+    font-family: Panton;
+    font-style: normal;
+    font-size: 30px;
+    height:50px;
+    width:50px;
+      vertical-align: middle;
+  }
+  
+
+  
+    .letra{
+      font-family: Panton;
+      font-style: normal;
+      font-weight: normal;
+      color: #004581;
+      width:90%;
+  }
+  
+  .seccion3{
+    width:100%;
+    padding: 50px;
+  }
+  .seccion3Imagen{
+    background-color:#EFF5F7;
+  }
+
+  ul { list-style: none; } 
+    
+  .lila li{
+     color: #004581;
+     font-size:28px;
+  }
+
+  .rojo li{
+     color: #004581;
+     font-size:28px;
+  }
+  .lila li::before {
+     color: #89529E;
+      content: "\2713"; 
+      font-weight: bold;
+  }
+  
+  .rojo li::before {
+     color: #E83F35;
+      content: "\2713"; 
+      font-weight: bold;
+
+  }
+  
+  .preguntas li{
+     font-family: Panton;
+     font-style: normal;
+     font-weight: normal;
+     color: #7A7A7A;
+     font-size:16px;
+  }
+
+  .preguntas li::before {
+     color: #E83F35;
+      content: "\2713"; 
+      font-weight: bold;
+
+  }
+
+
+ .seccion4{
+    background-color: #EFF5F7;
+    padding: 50px;
+  }
+  
+  
+   .seccionPreguntas{
+    padding: 50px;
+     margin-bottom: 130px;
+  }
+
+  .accordion-button {
+    padding: 2rem 1.25rem;
+    font-size: 16px;
+}
+  
+</style>
+
+<script>
+  
+  function goToFinal(id){
+    	window.location.hash = id;
+        $('#'+id).toggleClass('show');
+  }
+</script>
+   <div class="bannerPrincipal">
+    <div class="row">
+      <div class="col">
+        <img class="logoTengo" src="{{ 'LogoTengo2.svg' | asset_url }}" alt="{{ shop.name }}" itemprop="logo" /> 
+
+        <p class="tituloPrincipal"> ASEGÚRATE DE ESTAR PREPARADO </p>	
+        <p class="detallePrincipal">Al comprar <b>Tengo! Seguro</b> disfruta la tranquilidad de estar protegido con la variedad de los seguros que encontrarás.</p>
+        <button class="buttonNormal" onclick="location.href='tel:+59177755555'">PÍDELO AL 77755555</button>
+        <button class="buttonOutline"  onclick="location.href='http://farmactivacion.abrenet.com'">ACTIVAR SEGURO</button>
+      </div>
+      <div class="col">
+         <img class="logoTengo" src="{{ 'tarjetas_banner.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo" /> 
+      </div>
+    </div>
+  </div>
+
+<section id="section1" class="container">
+   <div class="row">
+      <div class="col">
+			 <p class="tituloSeccion1"><b>Tengo! Seguro</b> es la nueva manera de adquirir un seguro de forma fácil, económica y sencilla. Ideal para cubrir las necesidades básicas.</p>
+      </div>
+    </div>
+		<div class="row logo_with-test-cu">
+          <div class="col-lg-1 col-md-6 col-sm-6 col-xs-12" ></div>
+            <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12" >
+            	<div class="text-center" style="margin-bottom:20px;">
+					<p>	
+						<img class="iconosSeccion1" src="{{ 'sinPeriodos.svg' | asset_url }}" alt="{{ shop.name }}" itemprop="logo" />
+
+					</p>
+                   <h4 class="title"><p class="detalleSeccion1">Sin periodos de carencia</p></h4>
+				</div>
+
+            </div>
+             <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12" >
+            	<div class="text-center" style="margin-bottom:20px;">
+					<p>	
+						<img class="iconosSeccion1" src="{{ 'currency-usd.svg' | asset_url }}" alt="{{ shop.name }}" itemprop="logo" />
+
+					</p>
+                   <h4 class="title"><p class="detalleSeccion1">Sin copagos, ni deducibles</p></h4>
+				</div>
+
+            </div>
+           <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12" >
+            	<div class="text-center" style="margin-bottom:20px;">
+					<p>	
+						<img class="iconosSeccion1" src="{{ 'person-check.svg' | asset_url }}" alt="{{ shop.name }}" itemprop="logo" />
+
+					</p>
+                   <h4 class="title"><p class="detalleSeccion1">Fácil activación</p></h4>
+				</div>
+
+            </div>
+           <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12" >
+            	<div class="text-center" style="margin-bottom:20px;">
+					<p>	
+						<img class="iconosSeccion1" src="{{ 'Llamada.svg' | asset_url }}" alt="{{ shop.name }}" itemprop="logo" />
+
+					</p>
+                   <h4 class="title"><p class="detalleSeccion1">Asistencia Médica Telefónica</p></h4>
+				</div>
+
+            </div>
+           <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12" >
+            	<div class="text-center" style="margin-bottom:20px;">
+					<p>	
+						<img class="iconosSeccion1" src="{{ 'Reloj.svg' | asset_url }}" alt="{{ shop.name }}" itemprop="logo" />
+
+					</p>
+                   <h4 class="title"><p class="detalleSeccion1">Sin largas colas para la atención</p></h4>
+				</div>
+
+            </div>
+           <div class="col-lg-1 col-md-6 col-sm-6 col-xs-12" ></div>
+		</div>	
+	</section>
+   <div class="section2">
+
+              <p class="tituloPrincipal"> ACTIVA TU TARJETA </p>	
+
+   		<div class="row">
+     		<div class="col">
+              <div class="section2Pasos"><div class="section2PasosNumero">1</div> <p class="section2PasosDescripcion">Raspa el código de la tarjeta</p></div>
+              <div class="section2Pasos"><div class="section2PasosNumero">2</div> <p class="section2PasosDescripcion">Haga clic en el botón <b>Activar mi Seguro</b></p></div>
+               <div class="section2Pasos"><div class="section2PasosNumero">3</div> <p class="section2PasosDescripcion">Ingresa el código oculto de tu tarjeta y completa el formulario</p></div>
+               <div class="section2Pasos"><div class="section2PasosNumero">4</div> <p class="section2PasosDescripcion">Recibirás un link para descargar tu Certificado de Cobertura y factura</p></div>
+      		</div>
+            <div class="col" style="padding-left:40px;">
+      		
+              <h1 class="letra">Una <b>cobertura accesible</b> y al alcance de todos</h3>
+              
+              <h4 class="letra">Puedes pedir Tengo! Seguro, en todas las sucursales Farmacorp o llamando al 77755555</h4>
+              <button class="buttonNormal" onclick="location.href='http://farmactivacion.abrenet.com'">ACTIVAR SEGURO</button>
+              <h6 class="letra">  También puedes llamar a la línea gratuita 800 10 2727</h6>
+      		</div>
+    	</div>
+  	</div>
+   <div id="seccion3" class="seccion3">
+        <p class="tituloPrincipal"> UN SEGURO PARA CADA PERSONA </p>	
+
+    <div class="row">
+      <div class="col">
+         <img class="logoTengo seccion3Imagen" src="{{ 'TarjetaSeguro-01.svg' | asset_url }}" alt="{{ shop.name }}" itemprop="logo" /> 
+      </div>
+      <div class="col">
+        <h2 class="letra" style="color: #89529E;padding:15px;">Seguro Médico Individual semestral </h2>
+
+        <ul class="lila">
+          <li>
+              Consulta ambulatoria
+              <h6 class="letra" style="padding-left: 30px;">En Medicina General y Ginecología sin límite de atenciones.</h6>
+          </li>
+           <li>
+              Medicamentos
+              <h6 class="letra" style="padding-left: 30px;">Cobertura de los medicamentos que prescriba cualquiera de los médicos de la red.</h6>
+          </li>
+           <li>
+              Laboratorios
+              <h6 class="letra" style="padding-left: 30px;">Cobertura de los laboratorios que prescriba cualquiera de los médicos de la red hasta Bs. 100.</h6>
+          </li>
+        </ul>
+         <h5 class="letra" style="color: #89529E;padding:15px;"><a data-toggle="collapse" href="#individual" role="button" aria-expanded="false" aria-controls="individual" onclick="goToFinal('individual');">Ver más +</a></h5>
+      </div>
+
+    </div>
+     
+     <div class="collapse seccion4" id="individual">
+        <p class="tituloPrincipal"  style="color: #89529E;"> Seguro Médico Individual Semestral </p>	
+
+    <div class="row">
+      <div class="col">
+        <h6 class="letra" style="color: #89529E;font-weight: bold; padding-top:20px;" >Compañía Aseguradora </h6>
+        <h6 class="letra" style="color: #7A7A7A;" >La Boliviana Ciacruz Seguros Personales S.A.</h6>
+
+        <h6 class="letra" style="color: #89529E;font-weight: bold;padding-top:20px;" >Modalidad del Seguro </h6>
+        <h6 class="letra" style="color: #7A7A7A;" >Sistema Cerrado bajo una Red de Proveedores Médicos/Farmacias/Laboratorios adscritos según Listado.</h6>
+        
+        <h6 class="letra" style="color: #89529E;font-weight: bold;padding-top:20px;" >Coberturas</h6>
+        <h6 class="letra" style="color: #7A7A7A;" >El beneficio aplica únicamente en la Red de Prestadores Médicos y Hospitalarios adjunto a la póliza. *Ninguna prestación está sujeta a reembolso.</h6>
+        
+        <h6 class="letra" style="color: #89529E;font-weight: bold;padding-top:20px;" >No cubre</h6>
+        <h6 class="letra" style="color: #7A7A7A;" >
+           - Los gastos provenientes de la atención de la maternidad y/o del parto.</br>
+           - Los gastos y atenciones médicas por concepto de enfermedades crónicas.</br>
+           - Reembolsos por atenciones médicas no autorizadas y/o que se hubieran realizado fuera de las Unidades Adscritas.</br>
+           - Atenciones ocasionadas por riñas callejeras y/o cuando el Asegurado se encuentre bajo efecto de drogas o bebidas alcohólicas.</br>
+           - Cuando el Asegurado presente lesiones auto infringidas.</br>
+           - Procesos clínicos y quirúrgicos realizados por enfermedad que se haya realizado en el día (cirugías menores).
+		</h6>
+      </div>
+      <div class="col">
+        <h6 class="letra" style="color: #89529E;font-weight: bold; padding-top:20px;" >Edad de Ingreso al seguro</h6>
+        <h6 class="letra" style="color: #7A7A7A;" >
+          
+			Mínima 18 años</br>
+   			Máxima 70 años y 364 días
+        </h6>
+
+    	<h6 class="letra" style="color: #89529E;font-weight: bold;padding-top:20px;" >Edad de permanencia</h6>
+        <h6 class="letra" style="color: #7A7A7A;" >
+          Para el titular:</br>
+          Da cobertura hasta 74 años y 364 días
+		</h6>
+        <button class="buttonNormal" onclick="location.href='https://farmacorp.com/collections/tengo'">COMPRAR SEGURO</button>
+        <button class="buttonOutline"  onclick="location.href='http://farmactivacion.abrenet.com'">ACTIVAR SEGURO</button>
+      </div>
+
+    </div>
+
+  </div>
+     
+     <div class="row">
+
+      <div class="col">
+        <h2 class="letra" style="color: #E83F35;padding:15px;">Seguro Médico Familiar mensual </h2>
+
+        <ul class="rojo">
+          <li>
+              Consulta ambulatoria
+              <h6 class="letra" style="padding-left: 30px;">En Medicina General, Pediatría y Ginecología sin límite de atenciones.</h6>
+          </li>
+           <li>
+              Medicamentos
+              <h6 class="letra" style="padding-left: 30px;">Cobertura de los medicamentos que prescriba cualquiera de los médicos de la red.</h6>
+          </li>
+           <li>
+              Laboratorios
+              <h6 class="letra" style="padding-left: 30px;">Cobertura de los laboratorios que prescriba cualquiera de los médicos de la red hasta Bs. 100.</h6>
+          </li>
+        </ul>
+         <h5 class="letra" style="color: #89529E;padding:15px;"><a data-toggle="collapse" href="#familiar" role="button" aria-expanded="false" aria-controls="familiar" onclick="goToFinal('familiar');">Ver más +</a></h5>
+      </div>
+      <div class="col">
+         <img class="logoTengo seccion3Imagen" src="{{ 'tarjeta_roja.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo" /> 
+      </div>
+
+    </div>
+  </div>
+
+<div class="collapse seccion4" id="familiar">
+        <p class="tituloPrincipal"  style="color: #E23E34;"> Seguro Médico Familiar Mensual </p>	
+
+    <div class="row">
+      <div class="col">
+        <h6 class="letra" style="color: #E23E34;font-weight: bold; padding-top:20px;" >Compañía Aseguradora </h6>
+        <h6 class="letra" style="color: #7A7A7A;" >La Boliviana Ciacruz Seguros Personales S.A.</h6>
+
+        <h6 class="letra" style="color: #E23E34;font-weight: bold;padding-top:20px;" >Modalidad del Seguro </h6>
+        <h6 class="letra" style="color: #7A7A7A;" >Sistema cerrado bajo una Red de proveedores Médicos, Farmacias y Laboratorios adscritos según listado.</h6>
+        
+        <h6 class="letra" style="color: #E23E34;font-weight: bold;padding-top:20px;" >Coberturas</h6>
+        <h6 class="letra" style="color: #7A7A7A;" >El beneficio aplica únicamente en la Red de Prestadores médicos y hospitalarios adjunto a la póliza.*Ninguna prestación está sujeta a reembolso</h6>
+        
+        <h6 class="letra" style="color: #E23E34;font-weight: bold;padding-top:20px;" >No cubre</h6>
+        <h6 class="letra" style="color: #7A7A7A;" >
+            - Los gastos provenientes de la atención de la   maternidad y/o del parto.</br>
+            - Los gastos y atenciones médicas por concepto   de enfermedades crónicas.</br>
+            - Reembolsos por atenciones médicas no autorizadas   y/o que se hubieran realizado fuera de las unidades   adscritas.</br>
+            - Atenciones ocasionadas por riñas callejeras y/o  cuando el Asegurado se encuentre bajo efecto de   drogas o bebidas alcohólicas.</br>
+            - Cuando el Asegurado presente lesiones auto infringidas.</br>
+            - Procesos clínicos y quirúrgicos realizados por enfermedad que se haya realizado en el día  (cirugías menores).
+		</h6>
+      </div>
+      <div class="col">
+        <h6 class="letra" style="color: #E23E34;font-weight: bold; padding-top:20px;" >Edad de ingreso al seguro</h6>
+        <h6 class="letra" style="color: #7A7A7A;" >
+          
+        	Para el titular, cónyugue y padres:</br>
+			Mínima - 18 años</br>
+ 			Máxima - 70 años y 364 días  
+        </h6>
+
+  		<h6 class="letra" style="color: #7A7A7A;" >
+          
+            Para los dependientes (hijos):</br>
+            Mínima - 0 años y 1 día</br>
+            Máxima - 24 años y 364 días
+        </h6>
+
+    	<h6 class="letra" style="color: #E23E34;font-weight: bold;padding-top:20px;" >Edad de permanencia</h6>
+        <h6 class="letra" style="color: #7A7A7A;" >
+          Para el titular:</br>
+		  Da cobertura hasta 74 años y 364 días
+		</h6>
+        <button class="buttonNormal" onclick="location.href='https://farmacorp.com/collections/tengo'">COMPRAR SEGURO</button>
+        <button class="buttonOutline"  onclick="location.href='http://farmactivacion.abrenet.com'">ACTIVAR SEGURO</button>
+      </div>
+
+    </div>
+
+  </div>
+
+ <div id="seccion4" class="seccionPreguntas">
+        <p class="tituloPrincipal"> PREGUNTAS FRECUENTES</p>	
+   
+ <div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+         ¿Por qué tener un seguro de salud?
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        
+        <h6 class="letra"  style="color: #7A7A7A;" >La importancia de contratar un seguro de salud va más allá de atención médica prioritaria, que ya es bastante si tomamos en cuenta que el sistema de salud quedó colapsado por la pandemia del Covid-19 en casi todos los países.</h6>
+        <h6 class="letra"  style="color: #7A7A7A;" >¿Pero qué pasaría si te dijéramos que hay muchos beneficios y que tener una póliza de salud es más económico de lo que crees?.</h6>
+      
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        ¿Qué es una Tarjeta Tengo Seguro?
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <h6 class="letra"  style="color: #7A7A7A;" >Es la manera más fácil de contratar un seguro para asegurarte a ti, a tu familia, a tus trabajadores permanentes o eventuales, para regalar a un ser querido o alguna persona que lo necesite.</h6>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+       ¿Qué cubre la Tarjeta Tengo Seguro?
+      </button>
+    </h2>
+    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+         <h6 class="letra"  style="color: #7A7A7A;" >Cubre la atención primaria mediante consultas telefónicas con médico general y consultas presenciales con Médico General, Ginecológico y Pediatra en caso del plan Familiar.</h6>
+      	<h6 class="letra"  style="color: #7A7A7A;" >Así también cubre Medicamentos recetados por consultas presenciales, gastos de Laboratorios hasta Bs. 100.- y aquellos gastos médicos ambulatorios a consecuencia de un accidente.</h6>  
+  
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading4">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapseThree">
+       ¿Cuáles son las ventajas de comprar Tengo seguro de Salud?
+      </button>
+    </h2>
+    <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        
+		<ul class="preguntas">
+          <li >
+             Atención inmediata mediante las consultas telefónicas.
+          </li>
+            <li>
+              Programación de citas presenciales por teléfono, evitando las interminables colas para la atención.
+          </li>
+        
+            <li>  Cuida tu patrimonio, con lo dicho por: “Sin salud no hay libertad, sin libertad no hay salud”. La mejor forma de cuidar tu patrimonio y el de los tuyos. *Joan Benach
+          </li>
+            <li>
+              Flexibilidad y comodidad para las atenciones médicas.
+          </li>
+            <li>
+              Sin Carencias ni copagos.
+          </li>
+            <li>
+              Descuentos en Laboratorios de la Red Médica.
+          </li>
+      	</ul>
+      </div>
+    </div>
+  </div>
+   <div class="accordion-item">
+     <h2 class="accordion-header" id="heading5">
+       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapseThree">
+         ¿Qué es una orientación telefónica?
+       </button>
+     </h2>
+     <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="heading5" data-bs-parent="#accordionExample">
+       <div class="accordion-body">
+         <h6 class="letra"  style="color: #7A7A7A;" >El asegurado cuenta con el apoyo de un equipo de profesionales de la salud a través de un servicio de atención al cliente 24 horas los 365 días del año para resolver las dudas que puedan surgir en cualquier momento relacionadas con enfermedades, tratamientos, comprensión de diagnósticos, etc.</h6>
+
+       </div>
+     </div>
+   </div>
+   <div class="accordion-item">
+     <h2 class="accordion-header" id="heading6">
+       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapseThree">
+         ¿Me cubre los gastos médicos para una enfermedad existente o crónica?
+       </button>
+     </h2>
+     <div id="collapse6" class="accordion-collapse collapse" aria-labelledby="heading6" data-bs-parent="#accordionExample">
+       <div class="accordion-body">
+         <h6 class="letra"  style="color: #7A7A7A;" >Si el asegurado desconoce de la enfermedad la primera atención tendrá cobertura, más no así el tratamiento del mismo.</h6>
+         <h6 class="letra"  style="color: #7A7A7A;" >Si el cliente no sabe que tiene la enfermedad y solicita la cita y en la consulta se diagnostica la enfermedad esa atención va a tener cobertura, pero sí, el cliente va al médico y le dice que tiene diabetes y solicita el tratamiento, es decir medicamentos, no cubriría.</h6>
+
+       </div>
+     </div>
+   </div>
+   <div class="accordion-item">
+     <h2 class="accordion-header" id="heading7">
+       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false" aria-controls="collapseThree">
+         ¿Cuáles se consideran enfermedades crónicas?
+       </button>
+     </h2>
+     <div id="collapse7" class="accordion-collapse collapse" aria-labelledby="heading7" data-bs-parent="#accordionExample">
+       <div class="accordion-body">
+
+         <h6 class="letra"  style="color: #7A7A7A;" >Las enfermedades crónicas son enfermedades de larga duración y por lo general de progresión lenta. Las enfermedades cardíacas, los infartos, el cáncer, las enfermedades respiratorias y la diabetes, son las principales causas de mortalidad en el mundo, siendo responsables del 63% de las muertes.</h6>
+
+       </div>
+     </div>
+   </div>
+   <div class="accordion-item">
+     <h2 class="accordion-header" id="heading8">
+       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse8" aria-expanded="false" aria-controls="collapseThree">
+         ¿Cómo debo proceder para una atención médica?
+       </button>
+     </h2>
+     <div id="collapse8" class="accordion-collapse collapse" aria-labelledby="heading8" data-bs-parent="#accordionExample">
+       <div class="accordion-body">
+         <h6 class="letra"  style="color: #7A7A7A;" >En caso de requerir una atención médica telefónica sólo debes llamar al 800 170 170 y solicitar la consulta con el médico general.</h6>
+         <h6 class="letra"  style="color: #7A7A7A;" >En caso que sea necesario la consulta presencial, debes llamar al 800 10 8820 para programar la cita.</h6>
+         <h6 class="letra"  style="color: #7A7A7A;" >NO PUEDE IR DIRECTAMENTE A LOS CENTROS MÉDICOS, YA QUE NO ESTARÍA CON COBERTURA.</h6>
+
+       </div>
+     </div>
+   </div>
+   <div class="accordion-item">
+     <h2 class="accordion-header" id="heading9">
+       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse9" aria-expanded="false" aria-controls="collapseThree">
+         ¿Qué requisitos debo tener para contratar un seguro de Salud?
+       </button>
+     </h2>
+     <div id="collapse9" class="accordion-collapse collapse" aria-labelledby="heading9" data-bs-parent="#accordionExample">
+       <div class="accordion-body">
+
+         <h6 class="letra"  style="color: #7A7A7A;" >De acuerdo al plan elegido sólo se debes asegurar cumplir estos requisitos:</h6>
+         <div class="row">
+           <div class="col">
+             <h6 class="letra" style="color: #7A7A7A;font-weight: bold;">Edad de Ingreso al seguro para el Titular, Conyugue y Padres:</h5>
+             <h6 class="letra" style="color: #7A7A7A;">Mínima 18 años</h5>
+             <h6 class="letra" style="color: #7A7A7A;">Máxima 70 años y 364 días</h5>
+             <h6 class="letra" style="color: #7A7A7A;font-weight: bold;">Para los Dependientes (hijos):</h5>
+             <h6 class="letra" style="color: #7A7A7A;">Mínima 0 años y 1 día</h5>
+             <h6 class="letra" style="color: #7A7A7A;">Máxima 24 años y 364 días</h5>
+           </div>
+           <div class="col">
+             <h6 class="letra" style="color: #7A7A7A;font-weight: bold;">Edad de Ingreso al seguro para el Titular:</h5>
+             <h6 class="letra" style="color: #7A7A7A;">Mínima 18 años</h5>
+             <h6 class="letra" style="color: #7A7A7A;">Máxima 70 años y 364 días</h5>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+   <div class="accordion-item">
+     <h2 class="accordion-header" id="heading10">
+       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse10" aria-expanded="false" aria-controls="collapseThree">
+         ¿Qué gastos médicos no estarían cubiertos por este seguro?
+       </button>
+     </h2>
+     <div id="collapse10" class="accordion-collapse collapse" aria-labelledby="heading10" data-bs-parent="#accordionExample">
+       <div class="accordion-body">
+         <h6 class="letra"  style="color: #7A7A7A;" >Este seguro no cubre los gastos directos y/o indirectos, complicaciones derivadas y/o relacionadas y/o a consecuencia de:</h6>
+
+         <h6 class="letra"  style="color: #7A7A7A;" >a) Los gastos provenientes de la atención de la maternidad y/o del parto.</h6>
+         <h6 class="letra"  style="color: #7A7A7A;" >b) Los gastos y atenciones médicas por concepto de enfermedades crónicas</h6>
+         <h6 class="letra"  style="color: #7A7A7A;" >c) Reembolsos por atenciones médicas no autorizadas y/o que se hubieran realizado fuera de las Unidades Adscritas</h6>
+         <h6 class="letra"  style="color: #7A7A7A;" >d) Atenciones ocasionadas por riñas callejeras y/o cuando el Asegurado se encuentre bajo efecto de drogas o bebidas alcohólicas.</h6>
+         <h6 class="letra"  style="color: #7A7A7A;" >e) Cuando el Asegurado presente lesiones auto infringidas.</h6>
+         <h6 class="letra"  style="color: #7A7A7A;" >f) Procesos clínicos y quirúrgicos realizados por enfermedad que se haya realizado en el día (cirugías menores).</h6>
+
+       </div>
+     </div>
+   </div>
+    
+  </div>
+    
+</div>

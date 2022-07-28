@@ -1,0 +1,36 @@
+.logo-strip__title{
+    margin-bottom: 3.7rem;
+    font-size: 2.4rem;
+    line-height: 2.9rem;
+    color: #1A1A1A;
+    font-weight: 600;
+}
+
+.logo-strip__title a{
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+    font-weight: 400;
+}
+
+/* .logo-strip .grid {
+    flex-wrap: nowrap;
+} */
+
+.logo-strip__grid-item{    
+    padding: 6rem;
+    border: 1px solid #E6E6E6;
+    margin: 0;
+    align-items: center;
+}
+
+.logo-strip__image{
+    padding: 0;
+}
+
+.logo-strip__image:not(:last-child){
+    border-right: 1px solid #E6E6E6;
+}
+
+.logo-strip__image:not(:first-child){
+    text-align: center;
+}

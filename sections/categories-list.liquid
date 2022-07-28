@@ -1,0 +1,128 @@
+<!-- /sections/categories-list.liquid -->
+{{ 'section-main-page.css' | asset_url | stylesheet_tag }}
+{{ 'section-categories-list.css' | asset_url | stylesheet_tag }}
+
+<div class="page-width categories-list">
+  <h1 class="main-page-title page-title h0">
+    Categorías
+  </h1>
+  {% if section.blocks.size > 0 %}
+    <div class="grid grid--1-col grid--3-col-tablet">
+      {% for block in section.blocks %}
+      <div class="grid__item">
+        <div class="inner">
+          <h3 class="small-hide">
+            <a href="{{- block.settings.url -}}">{{- block.settings.title -}}</a>
+          </h3>
+          <div class="childlinks">            
+            <h3 class="medium-hide large-up-hide">
+              <a href="{{- block.settings.url -}}">{{- block.settings.title -}}<span class="medium-hide large-hide">{%- render 'icon-chevron-down' -%}</span></a>
+            </h3>          
+            <div class="links">      
+              {% for link in linklists[block.settings.list].links %}      
+              <a href="{{ link.url }}">{{ link.title }}</a>
+              {% endfor %}
+              <a href="{{- block.settings.url -}}" class="link--view-more">Ver más</a>
+            </div>          
+          </div>
+          <div class="grid__item-image small-hide">
+            <div class="banner__media media media--transparent" style="padding-bottom: {{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100}}%;">
+              <img
+                src="{{ block.settings.image | img_url: '130x' }}"
+                loading="lazy"
+                alt="{{ block.settings.image.alt | escape }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.width | divided_by: block.settings.image.aspect_ratio }}"              
+              >
+            </div>
+          </div>          
+        </div>
+      </div>
+      {% endfor %}
+
+      {% comment %}
+      {% for link in linklists.categories-listing.links %}
+      <div class="grid__item">
+        <h3>
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        </h3>
+        {%- if link.links != blank -%}
+          <div class="childlinks">
+            {% for childlink in link.links %}
+              <a href="{{ childlink.url }}">{{ childlink.title }}</a>
+            {% endfor %}
+          </div>
+        {%- endif -%}
+      </div>
+      {% endfor %}
+      {% endcomment %}
+    </div>
+  {% endif %}
+</div>
+
+<script type="text/javascript" defer="defer">
+  $(function(){
+    $('.categories-list h3.medium-hide').on('click', function(e){
+      e.preventDefault();
+      let parent = $(this).closest('.grid');
+      let links = $(this).closest('h3').siblings('.links');
+      // parent.find('.links').slideUp();
+      $(this).toggleClass('active');
+      links.slideToggle();
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Categories Listing",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "collection_list",
+      "name": "Collection List",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Heading Link"
+        },
+        {
+          "type": "link_list",
+          "id": "list",
+          "label": "Select List"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Select Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Categories Listing",
+      "blocks": [
+        {
+          "type": "collection_list"
+        },
+        {
+          "type": "collection_list"
+        },
+        {
+          "type": "collection_list"
+        },
+        {
+          "type": "collection_list"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,121 @@
+<!--  
+  snippets/account-profile.liquid
+-->
+
+<style>
+  #profile,
+  #profile:target ~ * {
+    display: none;
+  }
+
+  #profile:target {
+    display: block;
+  }
+</style>
+
+<div id="profile">
+  <h2 class="account__page-title">{{ 'customer.account.profile' | t }}</h2>
+  <div class="profile-form-fields">
+    <form id="updateProfile">
+      <div class="grid grid--1-col grid--2-col-tablet">
+        <div class="grid__item field">
+          <label for="customer_nombre_edit">
+            {{ 'customer.account.first_name' | t }}
+          </label>
+          <input type="text"
+            value="{{ customer.first_name }}"
+            required
+            name="first_name"
+            id="customer_nombre_edit"
+            autocorrect="off"
+            autocapitalize="off"
+          >   
+        </div>
+        <div class="grid__item field">
+          <label for="customer_apellido_edit">
+            {{ 'customer.account.last_name' | t }}
+          </label>
+          <input type="text"
+            value="{{ customer.last_name }}"
+            required
+            name="last_name"
+            id="customer_apellido_edit"
+            autocorrect="off"
+            autocapitalize="off"
+          >   
+        </div>
+      </div>
+      <div class="grid grid--1-col grid--2-col-tablet">
+        <div class="grid__item field">
+          <label for="customer_telefono_edit">
+            {{ 'customer.account.last_name' | t }}
+          </label>
+          <input type="phone"
+            value="{{ customer.phone | replace: "+591", ""}}"
+            required
+            minlength="8"
+            maxlength="8"
+            name="phone"
+            id="customer_telefono_edit"
+            autocorrect="off"
+            autocapitalize="off"
+          >   
+        </div>
+      </div>
+      <div class="grid grid--1-col grid--2-col-tablet">
+        <div class="grid__item field">
+          <label for="customer_correo_edit">
+            {{ 'customer.account.email' | t }}
+          </label>
+          <input type="text"
+            disabled
+            value="{{ customer.email }}" 
+            name="email"
+            id="customer_correo_edit"
+          >   
+        </div>
+      </div>
+      <button type="submit" class="button button--primary">{{ 'customer.account.submit_btn' | t }}</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  $(function(){
+
+    $('#updateProfile').on('submit', function(e){
+      event.preventDefault();
+      updateInfo();
+    });
+
+    function updateInfo(){
+      updateCustomer(customer_nombre_edit.value, customer_apellido_edit.value, customer_telefono_edit.value)
+      .then(function(data) { 
+        if(data.ok){
+            alert(`{{ 'farmacorp.perfil.mensaje_exito_modificar_perfil' | t}}`);
+            location.reload();
+        }
+      }).catch(function(err) {  
+        var error_Message = "error";
+        try {
+
+            // jquery('#executeUpdateCustomer').html(`Actualizar`);
+            // jquery('#cancelUpdateCustomer').removeClass('ocultar');     
+            error_Message = err.responseJSON.message;
+
+        } catch (error) {
+          error_Message = `intentelo nuevamente`;
+        }
+
+        // var changePassword = jquery('#updateCustomer');
+        // changePassword.append(
+        //   `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        //     <strong>Ocurrio un error!</strong> ${error_Message}
+        //       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        //         <span aria-hidden="true">&times;</span>
+        //       </button>
+        //     </div>`);           
+      });
+    }
+  })
+</script>

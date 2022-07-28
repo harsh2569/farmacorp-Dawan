@@ -1,0 +1,455 @@
+<!-- snippets/-locator.liquid -->
+{% assign sku = product.selected_or_first_available_variant.sku %}
+
+<style>
+  .product_show_locality {
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    letter-spacing: -0.1px;
+    display: flex;
+    align-items: center;
+    column-gap: 9px;
+    color: var(--color-blue);
+    padding-bottom: 3.2rem;
+    border-bottom: 1px solid #F1F3F6;
+  } 
+
+  .locator__wrapper {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;    
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    /* transform: translateX(110%);
+    transition: transform 0.3s ease-in-out; */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+  }
+
+  .locator__wrapper.active {
+    /* transform: translate(0); */
+    opacity: 1;
+    pointer-events: all; 
+  }
+
+  .locator__inner-wrapper {
+    height: 100%;
+    overflow-y: auto;
+    max-width: 480px;
+    margin-left: auto;
+    background: #ffffff;
+    color: var(--color-black-0);
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    padding: 6.9rem 5.6rem 6.2rem;
+    position: relative;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .locator__wrapper.active .locator__inner-wrapper {
+    transform: translate(0);
+  }
+
+  #esList {
+    list-style: none;
+    padding: 0;
+  }
+
+  #esList li {
+    border-bottom: 1px solid #CFD5E1;
+    padding-bottom: 1.8rem;
+    margin-bottom: 1.7rem;
+  }
+
+  #esList li h3 {
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+    letter-spacing: -0.2px;
+  }
+
+  #esList li p {
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+    margin: 0;
+    margin-top: 0.6rem;
+    letter-spacing: -0.2px;
+  }
+
+  #esList li a {
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+    letter-spacing: -0.2px;
+    text-decoration-line: underline;
+    margin-top: 0.6rem;
+    display: block;
+    color: var(--color-black-0);
+  }
+
+  #esList li p.available:before {
+    content: '';
+    width: 9px;
+    height: 9px;
+    border-radius: 9px;
+    display: inline-block;
+    background: var(--color-success);
+    margin-right: 8px;
+  }
+
+  #esList li p.unavailable:before {
+    content: '';
+    width: 9px;
+    height: 9px;
+    border-radius: 9px;
+    display: inline-block;
+    background: var(--color-alert);;
+    margin-right: 8px;
+  }
+
+  .locator__inner-wrapper .loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.7);
+    display: none;
+  }
+
+  .locator__inner-wrapper .loader svg {
+    width: 30px;
+  }
+
+  #esList:empty+.loader {
+    display: flex;
+  }
+
+  body.locator-active {
+    overflow: hidden;
+  }
+
+  body.locator-active #MainContent {
+    position: relative;
+    z-index: 999998;
+  }
+
+  .locator__header {
+    padding-bottom: 3.7rem;
+    border-bottom: 1px solid #CFD5E1;
+    margin-bottom: 2.7rem;
+  }
+
+  .locator__header h2 {
+    font-weight: 600;
+    font-size: 2.4rem;
+    line-height: 3.2rem;
+    letter-spacing: -0.2px;
+  }
+
+  .locator__header .filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 3.2rem;
+  }
+
+  .locator__header .filter h3 {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+  }
+
+  .locator__header span.close__locator {
+    position: absolute;
+    top: 2.8rem;
+    right: 1.7rem;
+    padding: 5px;
+    cursor: pointer;
+  }
+
+  .locator__header span.close__locator svg {
+    display: block;
+  }
+
+  .locator__overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #373737;
+    /* opacity: 0; */
+    /* transition: opacity 0.3s ease-in-out; */
+    opacity: 0.4;
+  }
+
+  /* .locator__wrapper.active .locator__overlay {
+    opacity: 0.4;
+  } */
+
+  .locator_search {
+    margin-top: 2.4rem;
+  }
+
+  .locator_search .field {
+    display: block;
+  }
+
+  .locator_search .field__label {
+    margin-bottom: 1rem;
+    line-height: 2.4rem;
+    letter-spacing: -0.2px;
+  } 
+
+  .locator_search .field__input {
+    height: 3.8rem;
+    padding-left: 4rem !important;
+  }
+
+  .locator_search svg {
+    position: absolute;
+    left: 1.5rem;
+    bottom: 1.1rem;
+  }
+
+  #errorMessage {
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+    color: var(--color-alert);
+  }
+
+  .locator__inner-wrapper:after {
+    content: '';
+    width: 100%;
+    height: 6.2rem;
+    background: #ffffff;
+    position: sticky;
+    bottom: -6.2rem;
+    left: 0;
+    z-index: 100;
+    display: block;
+  }
+
+  @media screen and (max-width: 749px) {
+    .locator__inner-wrapper {
+      height: 80vh;
+      top: 20vh;
+      border-radius: 4px;
+      padding-top: 5rem;
+      padding-left: 1.6rem;
+      padding-right: 1.6rem;
+    }
+
+    .locator__header span.close__locator {
+      padding: 10px;
+      top: 1.9rem;
+      right: 1.9rem;      
+    }
+
+    .locator__header span.close__locator svg {
+      width: 16px;
+      height: auto;
+    }
+
+    .locator__header h2 {
+      font-size: 2rem;
+      line-height: 2.6rem;
+      padding-right: 5rem;
+    }
+
+    .locator_search {
+      margin-top: 3.6rem;
+    }
+
+    #esList li p {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+</style>
+
+<div>
+  <a class="product_show_locality" style="font-size: 16px;" aria-expanded="false" aria-controls="locatorWrapper" href="javascript:void(0);">
+    <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M8 4C6.067 4 4.5 5.567 4.5 7.5C4.5 9.433 6.067 11 8 11C9.933 11 11.5 9.433 11.5 7.5C11.5 5.567 9.933 4 8 4ZM8 9C7.17157 9 6.5 8.32843 6.5 7.5C6.5 6.67157 7.17157 6 8 6C8.82843 6 9.5 6.67157 9.5 7.5C9.5 8.32843 8.82843 9 8 9Z" fill="#0D6EFD"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M8 1.12304e-08C3.61278 -0.000219446 0.04387 3.533 0 7.92C0 13.3904 7.02535 19.4787 7.34836 19.7586L7.35 19.76C7.72422 20.0801 8.27578 20.0801 8.65 19.76C9 19.5 16 13.4 16 7.91999C15.9561 3.53299 12.3872 -0.000229989 8 1.12304e-08ZM8 17.65C6.33 16.06 2 11.65 2 7.92C2 4.60629 4.68629 1.92 8 1.92C11.3137 1.92 14 4.60629 14 7.92C14 11.62 9.67 16.06 8 17.65Z" fill="#0D6EFD"/>
+      </svg>
+      Encuentra una sucursal
+  </a>  
+  <div id="locatorWrapper" class="locator__wrapper">
+    <span class="close__locator locator__overlay"></span>
+    <div class="locator__inner-wrapper">
+      <div class="locator__header">
+        <span class="close__locator">{% render 'icon-close-2' %}</span>
+        <h2>Compralo en tu sucursal Farmacorp más cercana</h2>
+        <div class="locator_search">
+          <div class="field">    
+            <label class="field__label" for="locatorSearch">
+              Buscar por zona
+            </label>    
+            <input
+              class="field__input"
+              id="locatorSearch"
+              type="text"
+              autocomplete=""
+              autocorrect="off"
+              autocapitalize="off"    
+            >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M6 2C3.79086 2 2 3.79086 2 6C2 8.20914 3.79086 10 6 10C8.20914 10 10 8.20914 10 6C10 3.79086 8.20914 2 6 2ZM0 6C0 2.68629 2.68629 0 6 0C9.31371 0 12 2.68629 12 6C12 7.29583 11.5892 8.49572 10.8907 9.47653L15.7071 14.2929C16.0976 14.6834 16.0976 15.3166 15.7071 15.7071C15.3166 16.0976 14.6834 16.0976 14.2929 15.7071L9.47653 10.8907C8.49572 11.5892 7.29583 12 6 12C2.68629 12 0 9.31371 0 6Z" fill="#9CA3AF"/>
+              </svg>              
+          </div>
+        </div>
+        <div class="filter">
+          <h3>Mostrar solo sucursales disponibles</h3>
+          <div class="field--checkbox-switch">
+            <input type="checkbox" class="switch" id="filter__es">
+            <label for="filter__es">Mostrar solo sucursales disponibles</label>
+          </div>      
+        </div>
+      </div>
+      <div id="errorMessage"></div>
+      <ul id="esList" class="list-group"></ul>
+      <div class="loader">
+          <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+          <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+        </svg>
+      </div>
+    </div>    
+  </div>
+</div>
+
+<script>
+  $(function(){
+    $(".product_show_locality").on('click', function(e) {
+      e.preventDefault();
+      $('.locator__wrapper').addClass('active');
+      $('body').addClass('locator-active'); 
+      setTimeout(function(){
+        cargarDisponibilidad();
+      }, 50);
+    });    
+
+    $('.close__locator').on('click', function(e){
+      e.preventDefault();
+      $('.locator__wrapper').removeClass('active');
+      $('body').removeClass('locator-active');
+      // reset
+      $('#esList').empty();
+      $('.locator_search .field__input').val();
+      $('#filter__es').prop('checked', false);
+    });
+
+    $('.locator_search .field__input').on('keyup', function(e){
+      let _val = $(this).val().toLowerCase();
+      filteres(_val);            
+    });
+
+    $('#filter__es').on('change', function(){
+      if($(this).is(':checked')) {
+        $('#esList li[-available="false"]').hide();
+      } else {
+        $('#esList li').show();
+      }
+      filteres($('.locator_search .field__input').val());
+    });
+
+    function filteres(keyword, status) {
+      $('#errorMessage').text('')
+      if(keyword !== '') {
+        $('#esList li').hide();
+        let selector = $('#esList li');
+        if($('#filter__es').is(':checked')){
+          selector = $('#esList li[-available="true"]')
+        } 
+        selector.each(function(){
+          if($(this).data('search').indexOf(keyword) >= 0) {
+            $(this).show();
+          }
+        });
+        if($('#esList li:visible').length <= 0){
+          $('#errorMessage').text('No results found.')
+        }
+      } else {
+        $('#esList li').show();
+      }      
+    }
+
+    function cargarDisponibilidad() {   
+      getAvailabilityStockSucursal('{{sku}}',true)
+        .then(function(data) {    
+          if(data.data)
+          {
+            var esList = $('#esList');
+            data.data.forEach((word) => {
+              if(word.departamento.toLowerCase() == localStorage['city'].toLowerCase()){ 
+              
+                esList.append(`			
+                  <li -available="${word.hayMedicamentoBool}" 
+                      data-search="${word.descripcion.toLowerCase()}">
+                      <h3>${word.descripcion}</h3>
+                      <p>${word.departamento}</p>
+                      <p>${word.direccion}</p>
+                      <p>Servicios: ${word.servicios}</p>
+                      <p>Horario: ${word.horario}</p>                      
+                      <p class="${word.hayMedicamentoBool ? 'available': 'unavailable'}">${word.hayMedicamentoBool ? '{{ "farmacorp.producto.disponible" | t }}' : 'Agotado'}</p>
+                      <a href="http://maps.google.com/?q=${word.coordenadax},${word.coordenaday}" target="_blank">Ver dirección</a>
+                  </li>`);
+                  
+                // if(word.hayMedicamentoBool){
+                //   esList.append(`			
+                //   <li>
+                //       <h3>${word.descripcion}</h3>
+                //       <p>${word.departamento}</p>
+                //       <p>${word.direccion}</p>
+                //       <p>Servicios: ${word.servicios}</p>
+                //       <p>Horario: ${word.horario}</p>                      
+                //       <p class="${word.hayMedicamentoBool ? 'available': 'unavailable'}">{{ 'farmacorp.producto.disponible' | t }}</p>
+                //       <a href="http://maps.google.com/?q=${word.coordenadax},${word.coordenaday}" target="_blank">Ver dirección</a>
+                //   </li>`);
+                // } else{
+                //   esList.append(`			
+                //   <li>
+                //       <h3>${word.descripcion}</h3>
+                //       <p>${word.departamento}</p>
+                //       <p>${word.direccion}</p>
+                //       <p>Servicios: ${word.servicios}</p>
+                //       <p>Horario: ${word.horario}</p>
+                //       <p class="not-available">Sin stock</p>
+                //       <a href="http://maps.google.com/?q=${word.coordenadax},${word.coordenaday}" target="_blank">Ver dirección</a>
+                //   </li>`);
+                // }
+              }
+            });                
+            // document.getElementById("collapseExample").style.display = "block";   
+            
+          }else{
+              var errorMessage = $('#errorMessage');
+              errorMessage.prepend(`
+                  <div class="noStock alert alert-danger alert-dismissible fade show" role="alert">
+                    `+JSON.parse(data.errors[0].message)[0].Message+`
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>`);
+          }
+        // document.getElementById("calcular").style.display = "none";
+        }).catch(function(err) {
+            console.log(err);
+          // document.getElementById("calcular").style.display = "none";
+        });
+    }
+  })
+</script>

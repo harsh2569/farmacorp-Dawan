@@ -1,0 +1,13 @@
+<div class="floating-cart-count">{{ cart.item_count }}</div>
+{%- render 'icon-cart' -%}
+<div class="header__icon--cart-right"> 
+<span>{{ 'templates.cart.cart' | t }}</span>
+{%- if cart != empty -%}
+  <div class="cart-count-bubble">
+      {%- if cart.item_count < 100 -%}
+        <span aria-hidden="true">{{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }}</span>
+      {%- endif -%}
+      <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+  </div>
+{%- endif -%}
+</div>

@@ -1,0 +1,236 @@
+<!-- 
+  sections/farmaclub-header.liquid
+ -->
+
+<style>
+  .farmaclub-header {
+    background: #F9F9F9;
+  }
+
+  @media screen and (min-width: 750px) {
+    .farmaclub-header .page-width {
+      padding-right: 0;
+    }
+  }
+  
+  .farmaclub-header .grid__item.content {
+    padding: 10rem 0 5.5rem;
+  }
+
+  .farmaclub__logo svg {
+    width: 242px;
+    height: auto;
+    margin-bottom: 2.8rem;
+  }
+
+  .farmaclub-header h1 {
+    font-size: 5.6rem;
+    line-height: 6.2rem;
+    letter-spacing: -2.4px;
+    font-weight: 600;
+  }
+
+  .farmaclub-header p {
+    margin: 0;
+    margin-top: 4.2rem;
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 2.6rem;
+  }
+  
+  .farmaclub-header .button {
+    margin-top: 40px;
+  }
+
+  .farmaclub-header .logos {
+    margin-top: 4rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    column-gap: 1.5rem;
+  }
+
+  .farmaclub-header .logos img {
+    display: block;
+    height: 25px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .farmaclub-header .grid__item.content {
+      padding-right: 25px;
+    }
+    .farmaclub-header .grid__item.form {
+      padding-left: 25px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .farmaclub-header .grid__item.content {
+      padding-top: 5.8rem;
+      padding-bottom: 4.8rem;
+    }
+
+    .farmaclub-header .content {
+      text-align: center;
+    }
+
+    .farmaclub__logo svg {
+      width: 166px;
+      margin-bottom: 3.6rem;
+    }
+
+    .farmaclub-header h1 {
+      font-size: 2.4rem;
+      line-height: 3.2rem;
+      letter-spacing: -0.2px;
+    }
+
+    .farmaclub-header p {
+      font-size: 1.6rem;
+      line-height: 2.4rem;
+      letter-spacing: -0.2px;
+    }
+
+    .farmaclub-header .button {
+      margin-top: 25px;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      padding: 10px 16px;
+      border-radius: 8px;
+    }
+
+    .farmaclub-header .logos {
+      margin-top: 3.2rem;
+      column-gap: 1rem;
+      justify-content: space-between;
+    }
+
+    .farmaclub-header .logos img {
+      height: 18px;
+    }
+  }
+</style>
+
+<div class="farmaclub-header">
+  <div class="page-width">
+    <div class="grid grid--1-col grid--2-col-tablet">
+      <div class="grid__item content">
+        <div class="farmaclub__logo">{% render 'icon-farmaclub' %}</div>
+        <h1>{{- section.settings.title -}}</h1>
+        <p>{{- section.settings.subtext -}}</p>
+        <a href="{{ section.settings.btn_link }}" class="button button--farmaclub">{{ section.settings.btn_text }}</a>
+        {%- if section.blocks.size > 0 -%}
+        <div class="logos">
+          {% for block in section.blocks %}
+          <img src="{{ block.settings.image | img_url: 'x80' }}" />
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="grid__item form">
+        {%- if section.settings.image != blank -%}
+        <div class="{% if section.settings.image_mob != blank %} small-hide {% endif %} banner__media media {% if section.settings.image == blank %} placeholder{% endif %}"
+          style="padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%; height: 100%; padding-bottom: 0;">
+          <img
+            srcset="{%- if section.settings.image.width >= 375 -%}{{ section.settings.image | img_url: '375x' }} 375w,{%- endif -%}
+              {%- if block.settings.image.width >= 550 -%}{{ block.settings.image | img_url: '550x' }} 550w,{%- endif -%}
+              {%- if section.settings.image.width >= 750 -%}{{ section.settings.image | img_url: '750x' }} 750w,{%- endif -%}
+              {%- if section.settings.image.width >= 1100 -%}{{ section.settings.image | img_url: '1100x' }} 1100w,{%- endif -%}
+              {%- if section.settings.image.width >= 1500 -%}{{ section.settings.image | img_url: '1500x' }} 1500w,{%- endif -%}
+              {%- if section.settings.image.width >= 1780 -%}{{ section.settings.image | img_url: '1780x' }} 1780w,{%- endif -%}
+              {%- if section.settings.image.width >= 2000 -%}{{ section.settings.image | img_url: '2000x' }} 2000w,{%- endif -%}
+              {%- if section.settings.image.width >= 3000 -%}{{ section.settings.image | img_url: '3000x' }} 3000w,{%- endif -%}
+              {%- if section.settings.image.width >= 3840 -%}{{ section.settings.image | img_url: '3840x' }} 3840w,{%- endif -%}
+              {{ section.settings.image | img_url: 'master' }} {{ section.settings.image.width }}w"
+            sizes="100vw"
+            src="{{ section.settings.image | img_url: '1500x' }}"
+            loading="lazy"
+            alt="{{ section.settings.image.alt | escape }}"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.width | divided_by: section.settings.image.aspect_ratio }}"
+          >
+        </div>
+      {%- endif -%}
+      {%- if section.settings.image_mob != blank -%}
+        <div class="medium-hide large-up-hide banner__media media"
+          style="padding-bottom: {{ 1 | divided_by: section.settings.image_mob.aspect_ratio | times: 100 }}%;">
+          <img
+            srcset="{%- if section.settings.image_mob.width >= 375 -%}{{ section.settings.image_mob | img_url: '375x' }} 375w,{%- endif -%}
+              {%- if section.settings.image_mob.width >= 550 -%}{{ section.settings.image_mob | img_url: '550x' }} 550w,{%- endif -%}
+              {%- if section.settings.image_mob.width >= 750 -%}{{ section.settings.image_mob | img_url: '750x' }} 750w,{%- endif -%}
+              {%- if section.settings.image_mob.width >= 1100 -%}{{ section.settings.image_mob | img_url: '1100x' }} 1100w,{%- endif -%}
+              {%- if section.settings.image_mob.width >= 1500 -%}{{ section.settings.image_mob | img_url: '1500x' }} 1500w,{%- endif -%}
+              {%- if section.settings.image_mob.width >= 1780 -%}{{ section.settings.image_mob | img_url: '1780x' }} 1780w,{%- endif -%}
+              {%- if section.settings.image_mob.width >= 2000 -%}{{ section.settings.image_mob | img_url: '2000x' }} 2000w,{%- endif -%}
+              {%- if section.settings.image_mob.width >= 3000 -%}{{ section.settings.image_mob | img_url: '3000x' }} 3000w,{%- endif -%}
+              {%- if section.settings.image_mob.width >= 3840 -%}{{ section.settings.image_mob | img_url: '3840x' }} 3840w,{%- endif -%}
+              {{ section.settings.image_mob | img_url: 'master' }} {{ section.settings.image_mob.width }}w"
+            sizes="100vw"
+            src="{{ section.settings.image_mob | img_url: '750x' }}"
+            loading="lazy"
+            alt="{{ section.settings.image_mob.alt | escape }}"
+            width="{{ section.settings.image_mob.width }}"
+            height="{{ section.settings.image_mob.width | divided_by: section.settings.image_mob.aspect_ratio }}"
+          >
+        </div>
+      {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Farmaclub Main",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mob",
+      "label": "Mobile Image"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title",
+      "default": "Te recompensamos por todas tus compras"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Gana puntos Farmaclub® por cada una de tus compras y canjealas por premios exclusivos"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Label",
+      "default": "Agregar Farmaclub"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link",
+      "default": "/"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Icon"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
